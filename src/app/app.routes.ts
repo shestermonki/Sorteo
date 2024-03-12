@@ -2,10 +2,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'registro',
-    loadComponent: ()=> import('./layouts/registro/registro.component'),
+    path: 'login',
+    loadComponent: ()=> import('./layouts/login-admin/login-admin.component'),
   },{
     path: '**',
-    redirectTo: 'registro'
+    redirectTo: 'login'
   }
 ];
