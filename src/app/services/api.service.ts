@@ -4,7 +4,7 @@ import { Injectable, inject } from '@angular/core';
 @Injectable({providedIn: 'root'})
 export class ApiService {
 
-  private baseUrl: string = 'http://localhost:3001';
+  private baseUrl: string = 'http://localhost:3000/api';
 
   private http = inject( HttpClient );
 
