@@ -1,18 +1,20 @@
 <section class="container">
   <div class="card_section">
-    <form action="">
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
       <div class="form-group py-2">
-        <div class="input-field"> <span class="far fa-user p-2"></span> <input class="bg-none" aria-autocomplete="none" 
-            type="email" placeholder="Enter your email" required> </div>
+        <div class="input-field"> <span class="far fa-user p-2"></span> <input class="bg-none" aria-autocomplete="none"
+            type="email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" placeholder="Enter your email"
+            required> </div>
       </div>
       <div class="form-group py-1 pb-2">
         <div class="input-field"> <span class="fas fa-lock px-2"></span> <input class="bg-none" aria-autocomplete="none"
-            type="password" placeholder="Enter your Password" required> <button class="btn bg-white text-muted"> <span
+            type="password" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}"
+            placeholder="Enter your Password" required> <button class="btn bg-white text-muted"> <span
               class="far fa-eye-slash"></span> </button> </div>
       </div>
       <div class="d-flex justify-content-around ">
-        <div class="d-flex justify-content-around"> 
-          <input class="remember" type="checkbox" name="remember" id="remember"> 
+        <div class="d-flex justify-content-around">
+          <input class="remember" type="checkbox" name="remember" id="remember">
           <label for="remember" class="remember">Remember me</label>
         </div>
 
@@ -21,21 +23,26 @@
             password?</a>
         </div>
       </div>
-      <div class="btn btn-primary btn-block mt-3 col-12 ">Registrarme</div>
+
+      <button type="submit" class="btn btn-primary btn-block mt-3 col-12 ">Ingresar</button>
+
       <div class="text-center pt-4 pb-2 text-muted">Don't have an account? <a href="#">Sign up</a> </div>
     </form>
 
     <footer class="mx-3 my-2 py-2 bordert">
       <div class="text-center py-3">
-     
+
         <a href="https://www.google.com" target="_blank" class="px-2">
-          <img class="animate" src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png" alt="Google">
+          <img class="animate"
+            src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
+            alt="Google">
         </a>
         <a href="https://www.github.com" target="_blank" class="px-2">
-          <img class="animate" src="https://www.freepnglogos.com/uploads/512x512-logo-png/512x512-logo-github-icon-35.png" alt="GitHub">
+          <img class="animate"
+            src="https://www.freepnglogos.com/uploads/512x512-logo-png/512x512-logo-github-icon-35.png" alt="GitHub">
         </a>
       </div>
-      </footer>
+    </footer>
 
   </div>
 </section>
