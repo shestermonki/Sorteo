@@ -13,31 +13,24 @@ export class AdminService {
   public url;
 
   constructor(
-    private _http: HttpClient,private router: Router,
+    private _http: HttpClient, private router: Router,
   ) {
     this.url = GLOBAL.url;
   }
 
 
-  login_admin(data: any):Observable<any>{
-    let headers = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.post(this.url+'loginAdmin',data,{headers:headers});
+  login_admin(data: any): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.post(this.url + 'loginAdmin', data, { headers: headers });
   }
 
-
-
-
-  getToken(){
+  getToken() {
     return localStorage.getItem('token');
   }
 
-
-  public isAuthenticated(allowRoles : string[]):boolean{
-
+  public isAuthenticated(allowRoles: string[]): boolean {
     const token = localStorage.getItem('token');
-
-
-    if(!token){
+    if (!token) {
       return false;
     }
 
@@ -47,25 +40,33 @@ export class AdminService {
 
       console.log(decodedToken);
 
-      if(helper.isTokenExpired(token)){
+      if (helper.isTokenExpired(token)) {
         localStorage.clear();
         return false;
       }
 
-      if(!decodedToken){
-          console.log('NO ES VALIDO');
-          localStorage.removeItem('token');
-          return false;
-        }
-      } catch (error) {
+      if (!decodedToken) {
+        console.log('NO ES VALIDO');
         localStorage.removeItem('token');
         return false;
       }
-
+    } catch (error) {
+      localStorage.removeItem('token');
+      return false;
+    }
 
     return allowRoles.includes(decodedToken['rol']);
   }
 
+  listar_usuarios_admin(token: any): Observable<any> {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.get(this.url + 'listarUsuariosAdmin', { headers: headers });
+  }
+
+  eliminar_usuario_admin(id: string,token: any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.delete(this.url+'eliminar_usuario_admin/'+id,{headers:headers});
+  }
 
 
 }
