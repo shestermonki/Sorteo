@@ -58,7 +58,7 @@ export default class LoginAdminComponent implements OnInit {
             localStorage.setItem('token',response.token);
             localStorage.setItem('_id',response.data._id);
 
-            this._router.navigate(['/sorteo']);
+            this._router.navigate(['/dashboard']);
 
           }
 
