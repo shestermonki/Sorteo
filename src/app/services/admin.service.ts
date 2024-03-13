@@ -68,5 +68,11 @@ export class AdminService {
     return this._http.delete(this.url+'eliminar_usuario_admin/'+id,{headers:headers});
   }
 
+  actualizar_usuario_admin(id: string,data: any,token: any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.put(this.url+'actualizar_usuario_admin/'+id,data,{headers:headers});
+  }
+
+
 
 }

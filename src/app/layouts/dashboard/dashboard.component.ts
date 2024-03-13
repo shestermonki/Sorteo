@@ -5,15 +5,16 @@ import { AdminService } from '../../services/admin.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { io, Socket } from "socket.io-client";
 
 //declare var iziToast;
-declare var jQuery:any;
-declare var $:any;
+declare var jQuery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavComponent, SideNavComponent,NgIf,NgFor,RouterLink],
+  imports: [NavComponent, SideNavComponent, NgIf, NgFor, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -24,11 +25,19 @@ export default class DashboardComponent implements OnInit {
   public pageSize = 20;
   public token;
   public load_data = true;
+  public socket: Socket;
 
   constructor(
-    private _adminService: AdminService
-  ) {
+    private _adminService: AdminService) {
     this.token = this._adminService.getToken();
+    this.socket = io('http://localhost:3000');
+
+    // Escuchar el evento 'user-list' emitido por el servidor
+    this.socket.on('user-list', (data: any[]) => {
+      // Actualizar la lista de usuarios cuando se recibe el evento
+      this.usuarios = data;
+    });
+
   }
 
   ngOnInit(): void {
@@ -41,6 +50,7 @@ export default class DashboardComponent implements OnInit {
 
         this.usuarios = response.data;
         this.load_data = false;
+
         /* setTimeout(()=>{
 
         },3000) */
@@ -70,4 +80,7 @@ export default class DashboardComponent implements OnInit {
       }
     )
   }
+
+
+
 }
