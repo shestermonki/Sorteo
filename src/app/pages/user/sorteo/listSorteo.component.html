@@ -1,0 +1,29 @@
+<div class="card m-2">
+  <h1 class="card-header">Sorteos: 1 pendiente para las 20:00</h1>
+  <div class="contain-description d-flex justify-content-center align-items-center">
+    <div class="card-regalos w-50">
+      <h2 class="">Nombre del sorteo</h2>
+      <hr>
+      <p>Descripcion del sorteo</p>
+      <div>
+        <h3>Regalos</h3>
+        <div class="d-flex gap-5">
+          <div>regalo 1</div>
+          <div>regalo 2</div>
+          <div>regalo 3</div>
+          <div>regalo 4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-4 d-flex justify-content-center">
+  <button id="" class="btn btn-info" (click)="participarSorteo()">Participar</button>
+</div>
+
+<div *ngIf="participa">
+  Participando
+</div>
+
+<a *ngIf="entrarAlServer" [href]="urlInvitacion">Ingresar al servidor de Devtalles</a>

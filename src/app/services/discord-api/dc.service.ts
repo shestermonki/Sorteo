@@ -1,11 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { environments } from '../../../../environments';
 import { ApiService } from '../api.service';
+import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class DiscordService {
 
-  private urlPath = '/api/discord';
+  private urlPath = '/discord';
   private scope = 'identify'; // Si quiere añadir mas scopre añadir con un +
   private redirectUri = `${environments.baseUrl}/discord/authorize`;
 
@@ -18,10 +19,8 @@ export class DiscordService {
     return `${dcUrl}/oauth2/authorize?client_id=${clientId}&response_type=code&redirect_uri=${this.redirectUri}&scope=${this.scope}`;
   }
 
-  participarSorteo(){
-    return this.apiService.get(`${this.urlPath}/list-guilds`).subscribe( data =>{
-      console.log(data);
-    });
+  participarSorteo(): Observable<boolean>{
+    return this.apiService.get(`${this.urlPath}/register-sorteo`);
   }
 
 }
