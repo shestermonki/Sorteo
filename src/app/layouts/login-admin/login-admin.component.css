@@ -15,6 +15,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 20px;
+    
 }
 
 .panel-heading {
@@ -54,12 +56,12 @@ a:hover {
     padding: 5px;
     display: flex;
     align-items: center;
-    cursor: pointer;
+   
     border: 1px solid #ddd;
     color: #4343ff
 }
 
-input[type='text'],
+input[type='email'],
 input[type='password'] {
     border: none;
     outline: none;
@@ -95,7 +97,7 @@ a[target='_blank'] {
     content: "or connect with";
     position: absolute;
     top: -13px;
-    left: 33%;
+    left: 20%;
     background-color: #fff;
     padding: 0px 8px
 }
@@ -118,3 +120,35 @@ a[target='_blank'] {
         left: 25%
     }
 }
+
+.card_section {
+    background-color: #fff7f7;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 20px 20px 80px rgba(1, 1, 1, 0.5);
+    
+}
+
+.bg-none{
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.remember {
+    font-size: 12px;
+    margin: auto;
+
+}
+
+.forgot {
+    font-size: 13px;
+    margin: auto;
+    text-align: center;
+    margin-left: 10px;
+
+}
+
+.animate:hover {
+    transform: scale(1.1); /* Escala el elemento al 110% de su tamaño original al hacer hover */
+    transition: transform 0.2s ease-in-out; /* Transición suave de la transformación */
+  }
