@@ -32,9 +32,8 @@ export default class LoginAdminComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     if (this.token) {
-      this._router.navigate(['/']);
+      this._router.navigate(['/dashboard']);
     } else {
       //MANTENER EN EL COMPONENTE
     }

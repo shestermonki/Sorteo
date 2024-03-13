@@ -3,24 +3,29 @@ import { Observable } from "rxjs";
 import { GLOBAL } from "./GLOBAL";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-
+  private isLoggedIn: boolean = false;
   public url;
 
   constructor(
-    private _http: HttpClient,
+    private _http: HttpClient,private router: Router,
   ) {
     this.url = GLOBAL.url;
   }
+
 
   login_admin(data: any):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.post(this.url+'loginAdmin',data,{headers:headers});
   }
+
+
+
 
   getToken(){
     return localStorage.getItem('token');
@@ -60,11 +65,6 @@ export class AdminService {
 
     return allowRoles.includes(decodedToken['rol']);
   }
-
-
-
-
-
 
 
 
