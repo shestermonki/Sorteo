@@ -73,6 +73,9 @@ export class AdminService {
     return this._http.put(this.url+'actualizar_usuario_admin/'+id,data,{headers:headers});
   }
 
-
+  obtener_usuario_admin(id: string,token: any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url+'obtener_usuario_admin/'+id,{headers:headers});
+  }
 
 }
