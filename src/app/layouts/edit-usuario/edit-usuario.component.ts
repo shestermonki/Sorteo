@@ -42,8 +42,6 @@ export default class EditUsuarioComponent implements OnInit {
               } else {
                 this.usuario = response.data;
                 this.load_data = false;
-
-
               }
             },
             error => {
@@ -56,18 +54,14 @@ export default class EditUsuarioComponent implements OnInit {
   }
 
 
-
   actualizar(updateForm: { valid: any; }) {
     if (updateForm.valid) {
       this.load_btn = true;
       if (this.id !== undefined) {
         this._adminService.actualizar_usuario_admin(this.id, this.usuario, this.token).subscribe(
           response => {
-
-
             this.load_btn = false;
-
-            this._router.navigate(['/panel/clientes']);
+            this._router.navigate(['/panel/dashboard']);
           }, error => {
             console.log(error);
 
