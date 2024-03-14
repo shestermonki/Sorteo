@@ -1,9 +1,31 @@
 .contain-description{
-  height: 25rem;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr;
+  padding: 50px 0;
 
-  .card-regalos{
-    border: 2px solid black;
-    border-radius: 10px;
-    padding: 20px;
+}
+.card-regalos{
+  width: 90%;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.list-regalos{
+  /* background-color: white; */
+}
+
+@media screen and (max-width: 920px) {
+  .contain-description{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    
+  }
+
+  .contain-description .card-regalos{
+    width: 95%;
   }
 }

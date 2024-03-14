@@ -16,7 +16,7 @@ export class ApiService {
 
   private http = inject( HttpClient );
 
-  get(path: string, params: HttpParams = new HttpParams(), url?: string): Observable<any> {
+  get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.http.get(`${this.baseUrl}${path}`, { headers: this.headers, params });
   }
 

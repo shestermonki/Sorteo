@@ -1,29 +1,34 @@
 <div class="card m-2">
   <h1 class="card-header">Sorteos: 1 pendiente para las 20:00</h1>
-  <div class="contain-description d-flex justify-content-center align-items-center">
-    <div class="card-regalos w-50">
-      <h2 class="">Nombre del sorteo</h2>
-      <hr>
-      <p>Descripcion del sorteo</p>
-      <div>
-        <h3>Regalos</h3>
-        <div class="d-flex gap-5">
-          <div>regalo 1</div>
-          <div>regalo 2</div>
-          <div>regalo 3</div>
-          <div>regalo 4</div>
+  <div class="contain-description">
+    @for (sorteo of listSorteos(); track $index) {
+      <div class="card-regalos">
+        <h2 class="">{{ sorteo.prize }}</h2>
+        <hr>
+        <p>{{ sorteo.description }}</p>
+        <div class="list-regalos">
+          <h3>Regalos</h3>
+          <div class="d-flex gap-5">
+            <div>regalo 1</div>
+            <div>regalo 2</div>
+            <div>regalo 3</div>
+            <div>regalo 4</div>
+          </div>
+        </div>
+        <div class="p-4 d-flex justify-content-center">
+          <button id="" class="btn btn-info" (click)="participarSorteo(sorteo._id)">Participar</button>
         </div>
       </div>
-    </div>
+    }@empty {
+      <div class=" w-100 fs-1 p-3 bg-info bg-opacity-10 border border-info border-start-0 border-end-0">
+        No hay sorteos disponibles
+      </div>
+    }
   </div>
 </div>
 
-<div class="p-4 d-flex justify-content-center">
-  <button id="" class="btn btn-info" (click)="participarSorteo()">Participar</button>
-</div>
-
-<div *ngIf="participa">
-  Participando
-</div>
-
-<a *ngIf="entrarAlServer" [href]="urlInvitacion">Ingresar al servidor de Devtalles</a>
+@if (participa()) {
+  <div>Participando</div>
+}@else if( showMessageInfo()) {
+  <a [href]="urlInvitacion">Ingresar al servidor de Devtalles</a>
+}

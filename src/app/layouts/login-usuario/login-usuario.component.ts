@@ -13,7 +13,7 @@ export default class LoginUsuarioComponent implements OnInit{
   private discordService = inject( DiscordService );
 
   ngOnInit(): void {
-    // this.redirect();
+    this.loginByDiscord();
   }
 
   
