@@ -1,8 +1,26 @@
-<header>
-  Bienvenido Miguel
-</header>
+@if ( user() ) {
+  <header [style]="'background: '+user()?.banner_color">
+    <div class="d-flex gap-2 card-name-avatar">
+      <img [src]="srcAvatar()" alt="">
+      <div class="content-name">
+        <div class="d-flex gap-3 align-items-center">
+          <h1>
+            {{ user()?.global_name }}
+          </h1>
+          @if ( user()?.verified ) {
+            <i class="verify fa-solid fa-check"
+            title="verified"></i>
+          }
+        </div>
+        <p>
+          {{ user()?.username }}
+        </p>
+      </div>
+    </div>
+  </header>
+}
 
-<div class="card m-2">
+<div class="card m-2 contain-list-sorteo">
   <div class="contain-description">
     @for (sorteo of listSorteos(); track $index) {
       <div class="card-regalos">
@@ -59,9 +77,3 @@
     }
   }
 </div>
-
-
-<div>
-  {{ user() | json }}
-</div>
-

@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@ang
 import { DiscordService } from '../../../services/discord-api/dc.service';
 import { ResponseRegisterUser, SorteosService, TypeStatus } from '../../../services/sorteos.service';
 import { ResponseListSorteos } from '../../../interfaces';
+import { ResponseDateUser } from '../../../interfaces/user/response-user.interface';
 
 @Component({
   selector: 'app-list-sorteo',
@@ -22,13 +23,15 @@ export default class SorteoComponent implements OnInit {
 
   public listSorteos = signal<ResponseListSorteos[]>([]);
   public responseRegister = signal<ResponseRegisterUser | null>(null);
+  public user = signal<ResponseDateUser | null>(null);
+  public srcAvatar = signal<string>('https://cdn.discordapp.com/avatars/');
 
   private sorteosService = inject( SorteosService );
   private discordService = inject( DiscordService );
 
   ngOnInit(): void {
-    this.showListSorteos();
     this.getDataUser();
+    this.showListSorteos();
   }
   
   participarSorteo( sorteoId: string ){
@@ -46,11 +49,17 @@ export default class SorteoComponent implements OnInit {
     });
   }
 
-  public user = signal({});
-
   getDataUser(){
     this.discordService.getDataUser().subscribe( (user)=>{
-      this.user.update( ()=> user);
+      this.user.update( ()=> user );
+      console.log(this.user());
+      
+      if (this.user()?.avatar) {
+        const { id, avatar } = this.user()!;
+        this.srcAvatar.update( value => value + `${id}/${avatar}`);
+      }else{
+        // Añadir una img default si no tiene avatar
+      }
     });
   }
 

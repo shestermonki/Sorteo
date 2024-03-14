@@ -5,6 +5,7 @@ import { Observable, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenDc } from './token-dc';
+import { ResponseDateUser } from '../../interfaces/user/response-user.interface';
 
 @Injectable({ providedIn: 'root' })
 export class DiscordService {
@@ -35,10 +36,10 @@ export class DiscordService {
     }
   }
 
-  getDataUser(){
+  getDataUser(): Observable<ResponseDateUser>{
     const token = this.tokenDc.getToken();
     const headers = new HttpHeaders({ 'authorization': `Bearer ${token}`});
-    return this.http.get(`${this.dcUrl}/api/v10/users/@me`, {headers});
+    return this.http.get<ResponseDateUser>(`${this.dcUrl}/api/v10/users/@me`, {headers});
   }
 
   public isAuthenticated(allowRoles: string[]): boolean {
