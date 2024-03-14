@@ -24,7 +24,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/user/sorteo/listSorteo.component'),
   }, {
     path: '**',
-    redirectTo: 'login'
+    redirectTo: 'login-usuario'
   }
 
 ];

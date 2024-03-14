@@ -12,7 +12,7 @@ declare var iziToast: { show: (arg0: { title: string; titleColor: string; color:
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './login-admin.component.html',
   styleUrl: './login-admin.component.css'
 })
@@ -39,8 +39,8 @@ export default class LoginAdminComponent implements OnInit {
     }
   }
 
-  login(loginForm: { valid: any; }){
-    if(loginForm.valid){
+  login(loginForm: { valid: any; }) {
+    if (loginForm.valid) {
       console.log(this.user);
 
       let data = {
@@ -49,33 +49,21 @@ export default class LoginAdminComponent implements OnInit {
       }
 
       this._adminService.login_admin(data).subscribe(
-        response=>{
-          if(response.data == undefined){
+        response => {
+          if (response.data == undefined) {
 
-          }else{
+          } else {
             this.usuario = response.data;
-            localStorage.setItem('token',response.token);
-            localStorage.setItem('_id',response.data._id);
-
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('_id', response.data._id);
             this._router.navigate(['/dashboard']);
-
           }
-
         },
-        error=>{
+        error => {
           console.log(error);
 
         }
       );
-    }else{
-      iziToast.show({
-          title: 'ERROR',
-          titleColor: '#FF0000',
-          color: '#FFF',
-          class: 'text-danger',
-          position: 'topRight',
-          message: 'Los datos del formulario no son validos'
-      });
-    }
+    } else { }
   }
 }
