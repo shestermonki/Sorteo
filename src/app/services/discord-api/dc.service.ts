@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class DiscordService {
 
   private urlPath = '/discord';
-  private scope = 'identify'; // Si quiere añadir mas scopre añadir con un +
+  private scope = 'identify+guilds+email'; // Si quiere añadir mas scopre añadir con un +
   private redirectUri = `${environments.baseUrl}/discord/authorize`;
 
   private http = inject( HttpClient );

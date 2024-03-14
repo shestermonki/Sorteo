@@ -27,8 +27,9 @@
   </div>
 </div>
 
+<div>{{ message }}</div>
+
 @if (participa()) {
-  <div>Participando</div>
 }@else if( showMessageInfo()) {
   <a [href]="urlInvitacion">Ingresar al servidor de Devtalles</a>
 }

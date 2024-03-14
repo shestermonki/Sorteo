@@ -21,6 +21,7 @@ export default class SorteoComponent implements OnInit {
   public urlInvitacion = 'https://discord.com/invite/pBjEVYTC7t';
 
   public listSorteos = signal<ResponseListSorteos[]>([]);
+  public message = '';
   
   private discordService = inject( DiscordService );
   private sorteosService = inject( SorteosService );
@@ -31,9 +32,12 @@ export default class SorteoComponent implements OnInit {
   
   participarSorteo( sorteoId: string ){
     this.sorteosService.registerUserInSorteo(sorteoId)
-      .subscribe( isMember =>{
-      if( !isMember ) this.showMessageInfo.update( ()=> true );
-      this.participa.update( ()=> isMember);
+      .subscribe( data =>{
+        this.message = data.message;
+        console.log(this.message);
+        
+      // if( !isMember ) this.showMessageInfo.update( ()=> true );
+      // this.participa.update( ()=> isMember);
     });
   }
 
