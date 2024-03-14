@@ -1,9 +1,18 @@
+<header>
+  Bienvenido Miguel
+</header>
+
 <div class="card m-2">
-  <h1 class="card-header">Sorteos: 1 pendiente para las 20:00</h1>
   <div class="contain-description">
     @for (sorteo of listSorteos(); track $index) {
       <div class="card-regalos">
-        <h2 class="">{{ sorteo.prize }}</h2>
+        <div class="d-flex justify-content-between">
+          <h2 class="">{{ sorteo.name }}</h2>
+          <div>
+            <div>Comienza el: {{ sorteo.startDate | date:'dd/MM/yyyy' }} </div>
+            <div>Termina el: {{ sorteo.endDate | date:'dd/MM/yyyy' }} </div>
+          </div>
+        </div>
         <hr>
         <p>{{ sorteo.description }}</p>
         <div class="list-regalos">
@@ -27,9 +36,32 @@
   </div>
 </div>
 
-<div>{{ message }}</div>
+<div>
+  @switch (responseRegister()?.status) {
+    @case ( "OK" ) {
+      {{ responseRegister()?.message }}
+    }
+    @case ( "NOTSERVER" ) {
+      {{ responseRegister()?.message }}
+      <a [href]="urlInvitacion">Ingresar al servidor de Devtalles</a>
+    }
+    @case ( "NOTSORTEO" ) {
+      {{ responseRegister()?.message }}
+    }
+    @case ( "ISIN" ) {
+      {{ responseRegister()?.message }}
+    }
+    @case ( "OK" ) {
+      {{ responseRegister()?.message }}
+    }
+    @default {
+    
+    }
+  }
+</div>
 
-@if (participa()) {
-}@else if( showMessageInfo()) {
-  <a [href]="urlInvitacion">Ingresar al servidor de Devtalles</a>
-}
+
+<div>
+  {{ user() | json }}
+</div>
+

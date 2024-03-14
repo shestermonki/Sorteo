@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { DiscordService } from '../../../services/discord-api/dc.service';
-import { SorteosService } from '../../../services/sorteos.service';
+import { ResponseRegisterUser, SorteosService, TypeStatus } from '../../../services/sorteos.service';
 import { ResponseListSorteos } from '../../../interfaces';
 
 @Component({
@@ -21,29 +21,36 @@ export default class SorteoComponent implements OnInit {
   public urlInvitacion = 'https://discord.com/invite/pBjEVYTC7t';
 
   public listSorteos = signal<ResponseListSorteos[]>([]);
-  public message = '';
-  
-  private discordService = inject( DiscordService );
+  public responseRegister = signal<ResponseRegisterUser | null>(null);
+
   private sorteosService = inject( SorteosService );
+  private discordService = inject( DiscordService );
 
   ngOnInit(): void {
     this.showListSorteos();
+    this.getDataUser();
   }
   
   participarSorteo( sorteoId: string ){
     this.sorteosService.registerUserInSorteo(sorteoId)
       .subscribe( data =>{
-        this.message = data.message;
-        console.log(this.message);
-        
-      // if( !isMember ) this.showMessageInfo.update( ()=> true );
-      // this.participa.update( ()=> isMember);
+        if (!data) return;
+
+        this.responseRegister.update( ()=> data );
     });
   }
 
   showListSorteos(){
     this.sorteosService.getListSorteosUser().subscribe( listSorteos =>{
       this.listSorteos.update( ()=> listSorteos);
+    });
+  }
+
+  public user = signal({});
+
+  getDataUser(){
+    this.discordService.getDataUser().subscribe( (user)=>{
+      this.user.update( ()=> user);
     });
   }
 

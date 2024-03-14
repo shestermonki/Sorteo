@@ -23,6 +23,9 @@ export const routes: Routes = [
     path: 'sorteo',
     loadComponent: () => import('./pages/user/sorteo/listSorteo.component'),
   }, {
+    path: 'redirect/:token',
+    loadComponent: () => import('./pages/user/redirect/redirect.component'),
+  }, {
     path: '**',
     redirectTo: 'login-usuario'
   }

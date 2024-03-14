@@ -9,7 +9,6 @@ export class ApiService {
   headers = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
-    'authorization': 'Bearer TEufpnuGn7H4DuHSLTQenOA5IXHrFr'
   };
 
   private baseUrl: string = environments.baseUrl;
