@@ -1,3 +1,5 @@
+<h1>Hola</h1>
+
 <ng-container *ngIf="user_lc === undefined">
   <li class="nav-item d-lg-block d-none mb-0">
     <a routerLink="/login" class="nav-tool">
@@ -10,7 +12,8 @@
   <li class="nav-item d-lg-block d-none dropdown">
     <a class="nav-tool dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
       <i class="cxi-profile nav-tool-icon"></i>
-      <span class="nav-tool-label" style="background-color: red;">{{ user_lc.username }}</span>
+      <span class="nav-tool-label" style="background-color: red;">{{ user_lc.email }}</span>
+      <span>hola</span>
     </a>
     <div class="dropdown-menu">
       <a routerLink="/cuenta/perfil" routerLinkActive="active" class="dropdown-item">
