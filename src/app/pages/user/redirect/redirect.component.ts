@@ -15,9 +15,9 @@ import { TokenDc } from '../../../services/discord-api/token-dc';
 })
 export default class RedirectComponent implements OnInit{
 
-    private activatedRoute = inject( ActivatedRoute );
-    private tokenDc = new TokenDc();
-    private router = inject( Router );
+  private activatedRoute = inject( ActivatedRoute );
+  private tokenDc = new TokenDc();
+  private router = inject( Router );
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( ({token}) =>{

@@ -42,9 +42,12 @@
             <div>regalo 4</div>
           </div>
         </div>
-        <div class="p-4 d-flex justify-content-center">
-          <button id="" class="btn btn-info" (click)="participarSorteo(sorteo._id)">Participar</button>
-        </div>
+        <button (click)="participarSorteo(sorteo._id)"
+        class="btn btn-primary" type="button" [disabled]="loadingButton().disabled">
+        <span [class]="loadingButton().classLoading + ' spinner-grow-sm'" aria-hidden="true">
+        </span>
+        <span role="status">{{ loadingButton().message }}</span>
+        </button>
       </div>
     }@empty {
       <div class=" w-100 fs-1 p-3 bg-info bg-opacity-10 border border-info border-start-0 border-end-0">
@@ -54,26 +57,34 @@
   </div>
 </div>
 
-<div>
-  @switch (responseRegister()?.status) {
-    @case ( "OK" ) {
-      {{ responseRegister()?.message }}
+@if (responseRegister()) {
+  <div class="toaster" #toast
+    [ngClass]="{
+      'showToast': toggleToast(),
+      'hiddenToast': !toggleToast()
+    }">
+    @switch (responseRegister()?.status) {
+      @case ( "OK" ) {
+        {{ responseRegister()?.message }}
+      }
+      @case ( "NOTSERVER" ) {
+        {{ responseRegister()?.message }}
+        <a [href]="urlInvitacion">Ingresar al servidor de Devtalles</a>
+      }
+      @case ( "NOTSORTEO" ) {
+        {{ responseRegister()?.message }}
+      }
+      @case ( "ISIN" ) {
+        {{ responseRegister()?.message }}
+      }
+      @case ( "OK" ) {
+        {{ responseRegister()?.message }}
+      }
+      @default {
+        
+      }
     }
-    @case ( "NOTSERVER" ) {
-      {{ responseRegister()?.message }}
-      <a [href]="urlInvitacion">Ingresar al servidor de Devtalles</a>
-    }
-    @case ( "NOTSORTEO" ) {
-      {{ responseRegister()?.message }}
-    }
-    @case ( "ISIN" ) {
-      {{ responseRegister()?.message }}
-    }
-    @case ( "OK" ) {
-      {{ responseRegister()?.message }}
-    }
-    @default {
-    
-    }
-  }
-</div>
+  </div>
+}
+
+<app-spinner [isLoading]="pageLoading()" />

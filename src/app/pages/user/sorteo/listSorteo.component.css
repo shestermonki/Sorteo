@@ -57,3 +57,38 @@ header .content-name{
     width: 95%;
   }
 }
+
+
+.toaster{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #888;
+  padding: 15px 0;
+  width: 100%;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+}
+
+.showToast{ animation: slideInTop .3s forwards; }
+.hiddenToast{ animation: fadeOut .5s forwards }
+
+@keyframes slideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(calc(100% + 10px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
