@@ -1,16 +1,33 @@
 header{
+  background: linear-gradient(-45deg, var(--color-principal), var(--color-secundario), var(--color-light), var(--color-contraste));
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  height: 120px;
   padding: 10px;
-  /* background: linear-gradient(#000, #457235); */
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 header img{
   border-radius: 50%;
+  width: 80px;
+  height: 80px;
 }
 
 header .card-name-avatar{
-  background-color: #000a;
+  background-color: #0008;
   width: max-content;
-  padding: 15px;
+  padding: 10px;
   border-radius: 10px;
 }
 
@@ -29,20 +46,49 @@ header .content-name{
   border-radius: 50%;
 }
 
+
+.contain-sorteos{
+  height: calc(100vh - 120px);
+  padding: 20px;
+  background: var(--color-dark);
+  color: var(--color-contraste);
+}
+
+.card-sorteos{
+  box-shadow: 0.4px 0.9px 2px 0 black;
+  border-radius: 10px;
+}
+
 .contain-description{
   display: grid;
   justify-items: center;
   grid-template-columns: 1fr 1fr;
-  padding: 50px 0;
-
+  padding: 20px 0;
+  height: 100%;
 }
+
 .card-regalos{
   width: 90%;
+  height: 300px;
   border: 2px solid black;
   border-radius: 10px;
   padding: 20px;
 }
 
+.card-invitation{
+  background-color: var(--color-principal);
+  padding: 10px 0;
+  text-align: center;
+}
+
+a{
+  text-decoration: none;
+  color: #fff;
+}
+
+a:hover{
+  color: #4488ee;
+}
 
 @media screen and (max-width: 920px) {
   .contain-description{
@@ -50,45 +96,10 @@ header .content-name{
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
-    
+
   }
 
   .contain-description .card-regalos{
     width: 95%;
-  }
-}
-
-
-.toaster{
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 999999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #888;
-  padding: 15px 0;
-  width: 100%;
-  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
-}
-
-.showToast{ animation: slideInTop .3s forwards; }
-.hiddenToast{ animation: fadeOut .5s forwards }
-
-@keyframes slideInTop {
-  from {
-    opacity: 0;
-    transform: translateY(calc(100% + 10px));
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
   }
 }

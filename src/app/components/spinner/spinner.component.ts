@@ -26,6 +26,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, V
       align-items: center;
       height: 100%;
       background: #000a;
+      z-index: 9999;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
