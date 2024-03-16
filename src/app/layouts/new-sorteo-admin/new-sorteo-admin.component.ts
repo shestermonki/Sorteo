@@ -8,15 +8,13 @@ import { NgFor, NgIf } from '@angular/common';
 @Component({
   selector: 'app-new-sorteo-admin',
   standalone: true,
-  imports: [NavComponent, FormsModule, NgIf, NgFor,RouterLink],
+  imports: [NavComponent, FormsModule, NgIf, NgFor, RouterLink],
   templateUrl: './new-sorteo-admin.component.html',
   styleUrl: './new-sorteo-admin.component.css'
 })
 export default class NewSorteoAdminComponent implements OnInit {
 
-  public sorteo: any = {
-    imagenes: ''
-  };
+  public sorteo: any = {};
   public token: any;
   public load_btn = false;
 

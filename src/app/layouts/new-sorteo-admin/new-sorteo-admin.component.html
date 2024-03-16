@@ -19,17 +19,27 @@
       <div class="row">
         <div class="col-md-4 form-group">
           <label for="validationCustom01" class="form-label">Nombre</label>
-          <input class="form-control" type="text" placeholder="Nombre" required name="nombres"
+          <input class="form-control" type="text" placeholder="Nombre" required name="name"
             [(ngModel)]="sorteo.name">
         </div>
         <div class="col-md-4 form-group">
           <label for="validationCustom01" class="form-label">Descripcion</label>
-          <input class="form-control" type="text" placeholder="Descripcion" required name="apellidos"
+          <input class="form-control" type="text" placeholder="Descripcion" required name="description"
             [(ngModel)]="sorteo.description">
         </div>
         <div class="col-md-4 form-group">
           <label for="validationCustom01" class="form-label">Prize</label>
-          <input class="form-control" type="text" placeholder="Prize" required name="email" [(ngModel)]="sorteo.prize">
+          <input class="form-control" type="text" placeholder="Prize" required name="prize" [(ngModel)]="sorteo.prize">
+        </div>
+
+        <div class="col-md-4 form-group">
+          <label for="validationCustom01" class="form-label">startDate</label>
+          <input class="form-control" type="date" placeholder="Prize" required name="startDate" [(ngModel)]="sorteo.startDate">
+        </div>
+
+        <div class="col-md-4 form-group">
+          <label for="validationCustom01" class="form-label">endDate</label>
+          <input class="form-control" type="date" placeholder="Prize" required name="endDate" [(ngModel)]="sorteo.endDate">
         </div>
       </div>
 
