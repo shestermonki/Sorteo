@@ -38,6 +38,7 @@ export class DiscordService {
 
   getDataUser(): Observable<ResponseDateUser>{
     const token = this.tokenDc.getToken();
+    
     const headers = new HttpHeaders({ 'authorization': `Bearer ${token}`});
     return this.http.get<ResponseDateUser>(`${this.dcUrl}/api/v10/users/@me`, {headers});
   }

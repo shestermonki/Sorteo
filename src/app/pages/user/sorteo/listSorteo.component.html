@@ -1,25 +1,4 @@
-<header>
-  <div class="d-flex gap-2 card-name-avatar">
-    @if (user()) {
-      <img [src]="srcAvatar()" alt="">
-      
-      <div class="content-name">
-        <div class="d-flex gap-3 align-items-center">
-          <h2 class="m-0">
-            {{ user()!.global_name }}
-          </h2>
-          @if ( user()!.verified ) {
-            <i class="verify fa-solid fa-check"
-            title="verified"></i>
-          }
-        </div>
-        <p class="m-0">
-          {{ user()!.username }}
-        </p>
-      </div>
-    }
-  </div>
-</header>
+<app-header [user]="user()"></app-header>
 
 <div class="contain-sorteos">
   <div class="card-sorteos h-100">
@@ -53,10 +32,7 @@
           </button>
         </div>
       }@empty {
-        <!-- <div class=" w-100 fs-1 p-3 bg-info bg-opacity-10 border
-          border-info border-start-0 border-end-0">
-          No hay sorteos disponibles
-        </div> -->
+        
       }
     </div>
   </div>

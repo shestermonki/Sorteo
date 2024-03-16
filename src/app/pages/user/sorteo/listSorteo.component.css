@@ -1,57 +1,7 @@
-header{
-  background: linear-gradient(-45deg, var(--color-principal), var(--color-secundario), var(--color-light), var(--color-contraste));
-  background-size: 400% 400%;
-  animation: gradient 10s ease infinite;
-  height: 120px;
-  padding: 10px;
-}
-
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
-header img{
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-}
-
-header .card-name-avatar{
-  background-color: #0008;
-  width: max-content;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-header .content-name{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: white;
-  text-shadow: 0 0 10px black;
-}
-.verify{
-  cursor: pointer;
-  background-color: #fff;
-  color: #000;
-  padding: 5px;
-  border-radius: 50%;
-}
-
-
 .contain-sorteos{
   height: calc(100vh - 120px);
   padding: 20px;
-  background: var(--color-dark);
-  color: var(--color-contraste);
+  color: var(--color-dark);
 }
 
 .card-sorteos{
@@ -69,7 +19,7 @@ header .content-name{
 
 .card-regalos{
   width: 90%;
-  height: 300px;
+  height: max-content;
   border: 2px solid black;
   border-radius: 10px;
   padding: 20px;

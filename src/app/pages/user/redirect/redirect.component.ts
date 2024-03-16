@@ -22,7 +22,8 @@ export default class RedirectComponent implements OnInit{
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( ({token}) =>{
       if (!token) this.router.navigateByUrl( '/login-usuario' );
-
+      console.log(token);
+      
       this.tokenDc.setToken(token);
       this.router.navigateByUrl( '/sorteo' );
     });
