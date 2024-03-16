@@ -37,6 +37,7 @@ export default class SorteoComponent implements OnInit {
     this.showListSorteos();
   }
 
+
   participarSorteo( sorteoId: string ){
     this.sorteosService.registerUserInSorteo(sorteoId)
       .subscribe( data =>{
