@@ -20,24 +20,17 @@ declare var $: any;
 })
 export default class DashboardComponent implements OnInit {
   public usuarios: Array<any> = [];
+  public sorteos: Array<any> = [];
 
   public page = 1;
   public pageSize = 20;
   public token;
   public load_data = true;
-  public socket: Socket;
+
 
   constructor(
     private _adminService: AdminService) {
     this.token = this._adminService.getToken();
-    this.socket = io('http://localhost:3000');
-
-    // Escuchar el evento 'user-list' emitido por el servidor
-    this.socket.on('user-list', (data: any[]) => {
-      // Actualizar la lista de usuarios cuando se recibe el evento
-      this.usuarios = data;
-    });
-
   }
 
   ngOnInit(): void {
@@ -50,7 +43,7 @@ export default class DashboardComponent implements OnInit {
 
         this.usuarios = response.data;
         this.load_data = false;
-
+        console.log(this.usuarios)
         /* setTimeout(()=>{
 
         },3000) */
@@ -58,6 +51,20 @@ export default class DashboardComponent implements OnInit {
       error => {
         console.log(error);
 
+      }
+    );
+
+    this._adminService.listar_sorteos_admin().subscribe(
+      response => {
+        this.sorteos = response; // Aquí asignamos directamente la respuesta a this.sorteos
+        this.load_data = false;
+        console.log(this.sorteos);
+        /* setTimeout(()=>{
+
+        },3000) */
+      },
+      error => {
+        console.log(error);
       }
     );
   }
