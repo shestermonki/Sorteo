@@ -1,0 +1,34 @@
+.bg-discord-image {
+  background-image: url(../../../assets/images/discord_image.webp);
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  
+
+
+}
+
+.discord-container{
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #03041c;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.discord-container:hover{
+  scale: 1.03;
+  transition: 1s;
+  animation-duration: 1s;
+  background-color: #3C0753;
+
+}
