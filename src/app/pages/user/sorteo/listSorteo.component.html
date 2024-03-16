@@ -8,11 +8,13 @@
           <div class="d-flex justify-content-between">
             <h2 class="">{{ sorteo.name }}</h2>
             <div>
-              <div>Comienza el: {{ sorteo.startDate | date:'dd/MM/yyyy' }} </div>
-              <div>Termina el: {{ sorteo.endDate | date:'dd/MM/yyyy' }} </div>
+              <div>Del: {{ sorteo.startDate | date:'dd/MM/yyyy' }} </div>
+              <div>Al: {{ sorteo.endDate | date:'dd/MM/yyyy' }} </div>
             </div>
           </div>
+
           <hr>
+          
           <p>{{ sorteo.description }}</p>
           <div class="list-regalos">
             <h3>Regalos</h3>

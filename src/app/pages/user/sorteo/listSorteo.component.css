@@ -10,15 +10,15 @@
 }
 
 .contain-description{
-  display: grid;
-  justify-items: center;
-  grid-template-columns: 1fr 1fr;
-  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
   height: 100%;
 }
 
 .card-regalos{
-  width: 90%;
+  max-width: 500px;
   height: max-content;
   border: 2px solid black;
   border-radius: 10px;
