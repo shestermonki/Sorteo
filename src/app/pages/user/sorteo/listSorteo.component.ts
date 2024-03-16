@@ -4,6 +4,7 @@ import { DiscordService } from '../../../services/discord-api/dc.service';
 import { ResponseRegisterUser, SorteosService, TypeStatus } from '../../../services/sorteos.service';
 import { ResponseListSorteos } from '../../../interfaces';
 import { ResponseDateUser } from '../../../interfaces/user/response-user.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-list-sorteo',
@@ -16,7 +17,9 @@ import { ResponseDateUser } from '../../../interfaces/user/response-user.interfa
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SorteoComponent implements OnInit {
-  
+
+
+
   public participa = signal( false );
   public showMessageInfo = signal( false );
   public urlInvitacion = 'https://discord.com/invite/pBjEVYTC7t';
@@ -33,7 +36,7 @@ export default class SorteoComponent implements OnInit {
     this.getDataUser();
     this.showListSorteos();
   }
-  
+
   participarSorteo( sorteoId: string ){
     this.sorteosService.registerUserInSorteo(sorteoId)
       .subscribe( data =>{
@@ -53,7 +56,7 @@ export default class SorteoComponent implements OnInit {
     this.discordService.getDataUser().subscribe( (user)=>{
       this.user.update( ()=> user );
       console.log(this.user());
-      
+
       if (this.user()?.avatar) {
         const { id, avatar } = this.user()!;
         this.srcAvatar.update( value => value + `${id}/${avatar}`);
@@ -62,5 +65,7 @@ export default class SorteoComponent implements OnInit {
       }
     });
   }
+
+
 
 }

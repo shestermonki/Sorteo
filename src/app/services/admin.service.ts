@@ -79,4 +79,25 @@ export class AdminService {
     return this._http.get(this.url+'obtener_usuario_admin/'+id,{headers:headers});
   }
 
+
+  agregar_imagen_galeria_admin(id: string, data: { _id: string | Blob; imagen: string | Blob; }, token: any): Observable<any> {
+    let headers = new HttpHeaders({ 'Authorization': token });
+    const fd = new FormData();
+    fd.append('_id', data._id);
+    fd.append('imagen', data.imagen);
+    return this._http.put(this.url + 'agregar_imgPortada_admin/' + id, fd, { headers: headers });
+  }
+
+  obtener_sorteo_admin(id: string, token: any): Observable<any> {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.get(this.url + 'obtener_sorteo_admin/' + id, { headers: headers });
+  }
+
+  eliminar_imagen_galeria_admin(id: string, data: any, token: any): Observable<any> {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.put(this.url + 'eliminar_imagen_galeria_admin/' + id, data, { headers: headers });
+  }
+
+
+
 }

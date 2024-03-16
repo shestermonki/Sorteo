@@ -35,9 +35,11 @@ export class SorteosService {
 
   constructor() { }
 
+
+
   getListSorteosUser(): Observable<ResponseListSorteos[]>{
     const token = this.tokenDc.getToken();
-    
+
     const headers = new HttpHeaders({ 'authorization': `Bearer ${token}` });
     return this.http.get<ResponseListSorteos[]>( `${this.baseUrl}${this.path}`, { headers } );
   }
