@@ -52,6 +52,8 @@ export default class SorteoComponent implements OnInit {
     });
   }
 
+
+
   getDataUser(){
     this.discordService.getDataUser().subscribe( (user)=>{
       this.user.update( ()=> user );
