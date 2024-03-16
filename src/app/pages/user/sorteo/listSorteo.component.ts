@@ -4,6 +4,14 @@ import { DiscordService } from '../../../services/discord-api/dc.service';
 import { RegisterUserInSorteo, SorteosService } from '../../../services/sorteos.service';
 import { ResponseListSorteos } from '../../../interfaces';
 import { ResponseDateUser } from '../../../interfaces/user/response-user.interface';
+import { SpinnerComponent } from '../../../components/spinner/spinner.component';
+import { ToastComponent } from '../../../components/toast/toast.component';
+import { HeaderComponent } from '../components/header/header.component';
+
+interface LoadingButton {
+  message      : string;
+  classLoading : string;
+}
 
 @Component({
   selector: 'app-list-sorteo',
@@ -20,8 +28,6 @@ import { ResponseDateUser } from '../../../interfaces/user/response-user.interfa
 })
 export default class SorteoComponent implements OnInit {
 
-  public participa = signal( false );
-  public showMessageInfo = signal( false );
   public urlInvitacion = 'https://discord.com/invite/pBjEVYTC7t';
 
   public user = signal<ResponseDateUser | null>(null);
@@ -44,38 +50,46 @@ export default class SorteoComponent implements OnInit {
     await this.showListSorteos();
   }
 
-  participarSorteo( sorteoId: string ){
-    this.sorteosService.registerUserInSorteo(sorteoId)
-      .subscribe( data =>{
-        if (!data) return;
-
-        this.responseRegister.update( ()=> data );
+  async getDataUser(){
+    this.pageLoading.set( true );
+    this.discordService.getDataUser().subscribe( (user)=>{
+      
+      this.user.update( ()=> user );
+      
     });
   }
 
   async showListSorteos(){
     this.sorteosService.getListSorteosUser().subscribe( listSorteos =>{
-
+      
       this.listSorteos.update( ()=> listSorteos);
       this.pageLoading.set( false );
 
     });
   }
 
-  getDataUser(){
-    this.discordService.getDataUser().subscribe( (user)=>{
-      this.user.update( ()=> user );
-      console.log(this.user());
+  participarSorteo( sorteoId: string ){
+    this.loadingButton.set({
+      classLoading: 'spinner-grow',
+      message: 'Registrando...',
+    });
+    this.sorteosService.registerUserInSorteo(sorteoId)
+    .subscribe( data =>{
 
-      if (this.user()?.avatar) {
-        const { id, avatar } = this.user()!;
-        this.srcAvatar.update( value => value + `${id}/${avatar}`);
-      }else{
-        // Añadir una img default si no tiene avatar
-      }
+      if (!data) return;
+      this.respRegisterSorteo.update( ()=> data );
+      this.toggleToast.set( true );
+      
+      this.loadingButton.set({
+        classLoading: '',
+        message: 'Participar',
+      });
+      
+      setTimeout(() => {
+        this.toggleToast.set( false );
+      }, 5000);
+      
     });
   }
-
-
 
 }
