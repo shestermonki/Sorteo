@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import { Router, RouterLink } from '@angular/router';
-import NavComponent from '../nav/nav.component';
+import NavComponent from '../../components/nav/nav.component';
 import { FormsModule } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 

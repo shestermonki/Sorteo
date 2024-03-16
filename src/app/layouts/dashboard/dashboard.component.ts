@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import NavComponent from '../nav/nav.component';
-import SideNavComponent from '../side-nav/side-nav.component';
+import NavComponent from '../../components/nav/nav.component';
+import SideNavComponent, { SideNavList } from '../../components/side-nav/side-nav.component';
 import { AdminService } from '../../services/admin.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { io, Socket } from "socket.io-client";
 
 //declare var iziToast;
 declare var jQuery: any;
@@ -14,11 +12,22 @@ declare var $: any;
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavComponent, SideNavComponent, NgIf, NgFor, RouterLink],
+  imports: [
+    NavComponent,
+    SideNavComponent,
+    CommonModule,
+    RouterLink
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export default class DashboardComponent implements OnInit {
+  
+  public navLinks: SideNavList[] = [
+    {name: 'Crear Sorteos', link: '/panel/newsorteo'},
+    {name: 'Galeria Sorteos', link: ''},
+  ]
+
   public usuarios: Array<any> = [];
   public sorteos: Array<any> = [];
 
@@ -26,7 +35,6 @@ export default class DashboardComponent implements OnInit {
   public pageSize = 20;
   public token;
   public load_data = true;
-
 
   constructor(
     private _adminService: AdminService) {
@@ -43,10 +51,7 @@ export default class DashboardComponent implements OnInit {
 
         this.usuarios = response.data;
         this.load_data = false;
-        console.log(this.usuarios)
-        /* setTimeout(()=>{
-
-        },3000) */
+        console.log(this.usuarios);
       },
       error => {
         console.log(error);
@@ -59,9 +64,6 @@ export default class DashboardComponent implements OnInit {
         this.sorteos = response; // Aquí asignamos directamente la respuesta a this.sorteos
         this.load_data = false;
         console.log(this.sorteos);
-        /* setTimeout(()=>{
-
-        },3000) */
       },
       error => {
         console.log(error);
@@ -73,21 +75,16 @@ export default class DashboardComponent implements OnInit {
     this._adminService.eliminar_usuario_admin(id, this.token).subscribe(
       response => {
 
-
         $('#delete-' + id).modal('hide');
         $('.modal-backdrop').removeClass('show');
 
         this.init_Data();
 
-
       },
       error => {
         console.log(error);
-
       }
     )
   }
-
-
 
 }

@@ -1,0 +1,13 @@
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+  <h3 class="w3-bar-item">Menu</h3>
+  @for (links of listLinks; track $index) {
+    <a class="w3-bar-item w3-button"
+      [routerLink]="links.link" routerLinkActive="">
+      {{ links.name }}
+    </a>
+  }@empty {
+    <a class="w3-bar-item w3-button">
+      1
+    </a>
+  }
+</div>

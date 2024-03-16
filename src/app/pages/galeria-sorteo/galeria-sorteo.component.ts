@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
 import { GLOBAL } from '../../../../src/app/services/GLOBAL';
 import { AdminService } from '../../services/admin.service';
-import SideNavComponent from '../../layouts/side-nav/side-nav.component';
+import SideNavComponent from '../../components/side-nav/side-nav.component';
 import { NgFor, NgIf } from '@angular/common';
 declare var $: (arg0: string) => { (): any; new(): any; val: { (arg0: string): void; new(): any; }; };
 
