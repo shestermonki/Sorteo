@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import NavComponent from '../nav/nav.component';
 import SideNavComponent from '../side-nav/side-nav.component';
 import { AdminService } from '../../services/admin.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { io, Socket } from "socket.io-client";
 
@@ -14,7 +13,7 @@ declare var $: any;
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavComponent, SideNavComponent, NgIf, NgFor, RouterLink],
+  imports: [NavComponent, SideNavComponent, CommonModule, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

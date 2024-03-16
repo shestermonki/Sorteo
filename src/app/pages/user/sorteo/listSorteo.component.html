@@ -1,79 +1,51 @@
-@if ( user() ) {
-  <header [style]="'background: '+user()?.banner_color">
-    <div class="d-flex gap-2 card-name-avatar">
-      <img [src]="srcAvatar()" alt="">
-      <div class="content-name">
-        <div class="d-flex gap-3 align-items-center">
-          <h1>
-            {{ user()?.global_name }}
-          </h1>
-          @if ( user()?.verified ) {
-            <i class="verify fa-solid fa-check"
-            title="verified"></i>
-          }
-        </div>
-        <p>
-          {{ user()?.username }}
-        </p>
-      </div>
-    </div>
-  </header>
-}
+<app-header [user]="user()"></app-header>
 
-<div class="card m-2 contain-list-sorteo">
-  <div class="contain-description">
-    @for (sorteo of listSorteos(); track $index) {
-      <div class="card-regalos">
-        <div class="d-flex justify-content-between">
-          <h2 class="">{{ sorteo.name }}</h2>
-          <div>
-            <div>Comienza el: {{ sorteo.startDate | date:'dd/MM/yyyy' }} </div>
-            <div>Termina el: {{ sorteo.endDate | date:'dd/MM/yyyy' }} </div>
+<div class="contain-sorteos">
+  <div class="card-sorteos h-100">
+    <div class="contain-description">
+      @for (sorteo of listSorteos(); track $index) {
+        <div class="card-regalos">
+          <div class="d-flex justify-content-between">
+            <h2 class="">{{ sorteo.name }}</h2>
+            <div>
+              <div>Del: {{ sorteo.startDate | date:'dd/MM/yyyy' }} </div>
+              <div>Al: {{ sorteo.endDate | date:'dd/MM/yyyy' }} </div>
+            </div>
           </div>
-        </div>
-        <hr>
-        <p>{{ sorteo.description }}</p>
-        <div class="list-regalos">
-          <h3>Regalos</h3>
-          <div class="d-flex gap-5">
-            <div>regalo 1</div>
-            <div>regalo 2</div>
-            <div>regalo 3</div>
-            <div>regalo 4</div>
+
+          <hr>
+          
+          <p>{{ sorteo.description }}</p>
+          <div class="list-regalos">
+            <h3>Regalos</h3>
+            <div class="d-flex gap-5">
+              <div>regalo 1</div>
+              <div>regalo 2</div>
+              <div>regalo 3</div>
+              <div>regalo 4</div>
+            </div>
           </div>
+          <button (click)="participarSorteo(sorteo._id)"
+          class="btn btn-primary" type="button">
+            <span [class]="loadingButton().classLoading + ' spinner-grow-sm'"
+              aria-hidden="true">
+            </span>
+            <span role="status">{{ loadingButton().message }}</span>
+          </button>
         </div>
-        <div class="p-4 d-flex justify-content-center">
-          <button id="" class="btn btn-info" (click)="participarSorteo(sorteo._id)">Participar</button>
-        </div>
-      </div>
-    }@empty {
-      <div class=" w-100 fs-1 p-3 bg-info bg-opacity-10 border border-info border-start-0 border-end-0">
-        No hay sorteos disponibles
-      </div>
-    }
+      }@empty {
+        
+      }
+    </div>
   </div>
 </div>
 
-<div>
-  @switch (responseRegister()?.status) {
-    @case ( "OK" ) {
-      {{ responseRegister()?.message }}
-    }
-    @case ( "NOTSERVER" ) {
-      {{ responseRegister()?.message }}
-      <a [href]="urlInvitacion">Ingresar al servidor de Devtalles</a>
-    }
-    @case ( "NOTSORTEO" ) {
-      {{ responseRegister()?.message }}
-    }
-    @case ( "ISIN" ) {
-      {{ responseRegister()?.message }}
-    }
-    @case ( "OK" ) {
-      {{ responseRegister()?.message }}
-    }
-    @default {
-    
-    }
-  }
-</div>
+@if (respRegisterSorteo()?.status === 'NOTSERVER') {
+  <div class="card-invitation">
+    <a href="https://discord.com/invite/pBjEVYTC7t">Ingresa a nuestro Servidor</a>
+  </div>
+}
+
+<app-toast [toggleToast]="toggleToast()"
+  [respRegisterSorteo]="respRegisterSorteo()"></app-toast>
+<app-spinner [isLoading]="pageLoading()" />

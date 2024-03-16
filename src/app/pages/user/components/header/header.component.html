@@ -1,0 +1,38 @@
+<header>
+  <div class="d-flex gap-2 card-name-avatar">
+    @if (_user) {
+      @if (_user.avatar){
+        <img [src]="srcAvatar()" alt="">
+      }@else {
+        <div class="avatar">
+          <i class="fa-brands fa-discord"></i>
+        </div>
+      }
+      
+      <div class="content-name">
+        <div class="d-flex gap-3 align-items-center">
+          <h2 class="m-0">
+            {{ _user.global_name }}
+          </h2>
+          @if ( _user.verified ) {
+            <i class="verify fa-solid fa-check"
+            title="verified"></i>
+          }
+        </div>
+        <p class="m-0">
+          {{ _user.username }}
+        </p>
+      </div>
+    }
+  </div>
+  
+  <nav class="nav">
+    <!-- <a class="nav-link" role="button">Colocar mac opciones en el nav</a> -->
+    <a class="nav-link" role="button"
+      [routerLink]="['login-usuario']">
+      <i class="fa-solid fa-arrow-right-from-bracket fa-2xl"
+      style="color: white;"></i>
+    </a>
+  </nav>
+
+</header>
