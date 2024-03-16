@@ -1,0 +1,37 @@
+
+.toaster{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.3em;
+  padding: 15px 0;
+  width: 100%;
+  box-shadow: 0 5px 8px #0007;
+  opacity: 0;
+}
+
+.showToast{ animation: slideInTop .3s forwards; }
+.hiddenToast{ animation: fadeOut .5s forwards }
+
+@keyframes slideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(calc(100% + 10px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}

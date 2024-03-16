@@ -13,7 +13,7 @@ export enum TypeStatus {
   'OK' = 'OK'
 }
 
-export interface ResponseRegisterUser {
+export interface RegisterUserInSorteo {
   status: TypeStatus;
   message: string;
 }
@@ -42,12 +42,12 @@ export class SorteosService {
     return this.http.get<ResponseListSorteos[]>( `${this.baseUrl}${this.path}`, { headers } );
   }
 
-  registerUserInSorteo( sorteoId: string ): Observable<ResponseRegisterUser | undefined>{
+  registerUserInSorteo( sorteoId: string ): Observable<RegisterUserInSorteo | undefined>{
     const token = this.tokenDc.getToken();
 
     if (!token) return of(undefined);
 
-    return this.http.post<ResponseRegisterUser>
+    return this.http.post<RegisterUserInSorteo>
       ( `${this.baseUrl}${this.path}/register-user`, { sorteoId }, { headers: { 'authorization': `Bearer ${token}` }});
   }
 

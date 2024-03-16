@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { DiscordService } from '../../../services/discord-api/dc.service';
-import { ResponseRegisterUser, SorteosService, TypeStatus } from '../../../services/sorteos.service';
+import { RegisterUserInSorteo, SorteosService } from '../../../services/sorteos.service';
 import { ResponseListSorteos } from '../../../interfaces';
 import { ResponseDateUser } from '../../../interfaces/user/response-user.interface';
 import { SpinnerComponent } from '../../../components/spinner/spinner.component';
+import { ToastComponent } from '../../../components/toast/toast.component';
 
 interface LoadingButton {
   message      : string;
   classLoading : string;
-  disabled     : boolean;
 }
 
 @Component({
@@ -18,6 +18,7 @@ interface LoadingButton {
   imports: [
     CommonModule,
     SpinnerComponent,
+    ToastComponent,
   ],
   templateUrl: './listSorteo.component.html',
   styleUrl: './listSorteo.component.css',
@@ -25,57 +26,33 @@ interface LoadingButton {
 })
 export default class SorteoComponent implements OnInit {
   
-  public participa = signal( false );
-  public showMessageInfo = signal( false );
   public urlInvitacion = 'https://discord.com/invite/pBjEVYTC7t';
 
-  public toggleToast = signal( true );
-  public listSorteos = signal<ResponseListSorteos[]>([]);
-  public responseRegister = signal<ResponseRegisterUser | null>(null);
   public user = signal<ResponseDateUser | null>(null);
   public srcAvatar = signal<string>('https://cdn.discordapp.com/avatars/');
 
+  public listSorteos = signal<ResponseListSorteos[]>([]);
+  public respRegisterSorteo = signal<RegisterUserInSorteo | null>(null);
+
+  public toggleToast = signal( false );
   public loadingButton = signal<LoadingButton>({
     message   : 'Participar',
-    disabled  : false,
     classLoading : ''
   });
-
   public pageLoading = signal(false);
 
   private sorteosService = inject( SorteosService );
   private discordService = inject( DiscordService );
 
-  ngOnInit(): void {
-    this.getDataUser();
-    this.showListSorteos();
-  }
-  
-  participarSorteo( sorteoId: string ){
-    this.loadingButton().classLoading = 'spinner-grow';
-    this.loadingButton().message = 'Registrando...';
-    this.sorteosService.registerUserInSorteo(sorteoId)
-    .subscribe( data =>{
-      if (!data) return;
-      
-      this.responseRegister.update( ()=> data );
-      this.loadingButton.set({ classLoading: '', message: 'Participar', disabled: true});
-      setTimeout(() => {
-        this.toggleToast.set( false );
-      }, 5000);
-    });
+  async ngOnInit(){
+    await this.getDataUser();
+    await this.showListSorteos();
   }
 
-  showListSorteos(){
-    this.sorteosService.getListSorteosUser().subscribe( listSorteos =>{
-      this.listSorteos.update( ()=> listSorteos);
-      this.pageLoading.set( false );
-    });
-  }
-
-  getDataUser(){
+  async getDataUser(){
     this.pageLoading.set( true );
     this.discordService.getDataUser().subscribe( (user)=>{
+      
       this.user.update( ()=> user );
       
       if (this.user()?.avatar) {
@@ -84,6 +61,39 @@ export default class SorteoComponent implements OnInit {
       }else{
         // Añadir una img default si no tiene avatar
       }
+    });
+  }
+
+  async showListSorteos(){
+    this.sorteosService.getListSorteosUser().subscribe( listSorteos =>{
+      
+      this.listSorteos.update( ()=> listSorteos);
+      this.pageLoading.set( false );
+
+    });
+  }
+
+  participarSorteo( sorteoId: string ){
+    this.loadingButton.set({
+      classLoading: 'spinner-grow',
+      message: 'Registrando...',
+    });
+    this.sorteosService.registerUserInSorteo(sorteoId)
+    .subscribe( data =>{
+
+      if (!data) return;
+      this.respRegisterSorteo.update( ()=> data );
+      this.toggleToast.set( true );
+      
+      this.loadingButton.set({
+        classLoading: '',
+        message: 'Participar',
+      });
+      
+      setTimeout(() => {
+        this.toggleToast.set( false );
+      }, 5000);
+      
     });
   }
 
