@@ -62,6 +62,34 @@ export class AdminService {
     return allowRoles.includes(decodedToken['rol']);
   }
 
+  public isAuthenticatedUser(): boolean {
+
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const helper = new JwtHelperService();
+      var decodedToken = helper.decodeToken(token);
+      if (helper.isTokenExpired(token)) {
+        localStorage.clear();
+        return false;
+      }
+
+      if (!decodedToken) {
+        localStorage.clear();
+        return false;
+      }
+    } catch (error) {
+      localStorage.clear();
+      return false;
+    }
+
+    return true;
+  }
+
   listar_usuarios_admin(token: any): Observable<Users[]> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this._http.get<Users[]>(this.url + 'listarUsuariosAdmin', { headers: headers });
@@ -100,7 +128,7 @@ export class AdminService {
     return this._http.get(this.url + 'obtener_sorteo_admin/' + id, { headers: headers });
   }
 
-  obtener_admin(id: string, token: any): Observable<any> {
+  obtener_admin(id: any, token: string): Observable<any> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this._http.get(this.url + 'obtener_admin/' + id, { headers: headers });
   }

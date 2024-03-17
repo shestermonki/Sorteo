@@ -1,19 +1,49 @@
 <nav class="nav barnav">
   <div class="d-flex gap-2">
-    <a class="logo" routerLink="/admin/dashboard"
-      routerLinkActive="activeRouter">
+    <a class="logo" routerLink="/admin/dashboard" routerLinkActive="activeRouter">
       <i class="fa-solid fa-font-awesome"></i>
     </a>
     @for (links of navLinks; track $index) {
-      <a class="nav-link list-option" role="button"
-        [routerLink]="links.link" routerLinkActive="activeRouter">
-        {{ links.name }}
-      </a>
+    <a class="nav-link list-option" role="button" [routerLink]="links.link" routerLinkActive="activeRouter">
+      {{ links.name }}
+    </a>
     }
   </div>
 
-  <a class="nav-link" role="button"
-  [routerLink]="['/login']">
-  <i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i>
+  <ng-container *ngIf="user_lc == undefined">
+    <li class="nav-item d-lg-block d-none mb-0">
+      <a [routerLink]="['/login']" class="nav-tool">
+        <i class="cxi-profile nav-tool-icon"></i>
+        <span class="nav-tool-label">Iniciar sesión</span>
+      </a>
+    </li>
+  </ng-container>
+
+  <ng-container *ngIf="user_lc">
+    <li class="nav-item d-lg-block d-none dropdown">
+      <a class="nav-tool dropdown-toggle" toggle="dropdown" style="cursor: pointer;">
+        <i class="cxi-profile nav-tool-icon"></i>
+        <span class="nav-tool-label" style="font-size: 100;">{{user_lc.username}}</span>
+      </a>
+      <div class="dropdown-menu">
+        <a [routerLink]="['/cuenta/perfil']" routerLinkActive="active" class="dropdown-item">
+          <i class="cxi-profile mr-2"></i>
+          Perfil
+        </a>
+        <a href="#" class="dropdown-item">
+          <i class="cxi-comment mr-2"></i>
+          Messages
+          <span class="badge badge-pill badge-success ml-2">5</span>
+        </a>
+        <a (click)="logout()" class="dropdown-item" style="cursor: pointer;">
+          <i class="cxi-logout mr-2"></i>
+          Cerrar sesión
+        </a>
+      </div>
+    </li>
+  </ng-container>
+
+  <a class="nav-link" role="button" [routerLink]="['/login']">
+    <i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i>
   </a>
 </nav>

@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 
 
 export class TokenDc {
-  
+
   getToken() {
     const token = Cookies.get('discordToken');
     
