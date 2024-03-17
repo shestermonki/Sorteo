@@ -5,4 +5,7 @@
   --color-contraste: #030637;
   --color-secundario: #720455;
   --color-light: #910A67;
+  --text-color: #f5f4f4;
+  box-sizing:  content-box;
+
 }
