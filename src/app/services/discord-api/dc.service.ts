@@ -1,9 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { environments } from '../../../../environments';
-import { ApiService } from '../api.service';
-import { Observable, catchError, lastValueFrom, map, of, tap } from 'rxjs';
+import { Observable, lastValueFrom, } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenDc } from './token-dc';
 import { ResponseDataUser } from '../../interfaces/user/response-user.interface';
 
@@ -11,7 +9,7 @@ import { ResponseDataUser } from '../../interfaces/user/response-user.interface'
 export class DiscordService {
 
   private scope = 'identify+guilds+email'; // Si quiere añadir mas scopre añadir con un +
-  private redirectUri = `${environments.baseUrl}/discord/authorize`;
+  private redirectUri = `${environments.baseUrl}/redirect`;
   private usuarioLogueado: boolean = false;
 
   private dcUrl    = environments.dcUrl;
