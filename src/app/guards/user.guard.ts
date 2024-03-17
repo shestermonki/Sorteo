@@ -9,7 +9,7 @@ export const userGuard: CanActivateFn = async (route, state) => {
   const _discordService = inject( DiscordService );
   
   const isAuthenticated = await  _discordService.isAuthenticated();
-
+  
   if (isAuthenticated) {
     return true;
   }else{

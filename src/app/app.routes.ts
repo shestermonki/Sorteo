@@ -59,8 +59,7 @@ export const routes: Routes = [
         redirectTo: 'list-sorteos',
       }
     ],
-
-  }, {
+  },{
     path: 'redirect/:token',
     loadComponent: () => import('./pages/user/redirect/redirect.component'),
   }

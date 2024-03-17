@@ -5,6 +5,7 @@ import { ResponseListSorteos } from '../interfaces';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environments } from '../../../environments';
 import { TokenDc } from './discord-api/token-dc';
+import { DiscordService } from './discord-api/dc.service';
 
 export enum TypeStatus {
   'NOTSERVER' = 'NOTSERVER',
@@ -31,19 +32,19 @@ export class SorteosService {
   private baseUrl: string = environments.baseUrl;
   private path = '/sorteos';
   private http = inject( HttpClient );
-  private tokenDc = new TokenDc();
+  private dcService = inject( DiscordService );
 
   constructor() { }
 
   getListSorteosUser(): Observable<ResponseListSorteos[]>{
-    const token = this.tokenDc.getToken();
-    
+    const token = this.dcService.getToken();
+
     const headers = new HttpHeaders({ 'authorization': `Bearer ${token}` });
     return this.http.get<ResponseListSorteos[]>( `${this.baseUrl}${this.path}`, { headers } );
   }
 
   registerUserInSorteo( sorteoId: string ): Observable<RegisterUserInSorteo | undefined>{
-    const token = this.tokenDc.getToken();
+    const token = this.dcService.getToken();
 
     if (!token) return of(undefined);
 

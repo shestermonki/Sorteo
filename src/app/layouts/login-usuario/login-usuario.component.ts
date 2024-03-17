@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { DiscordService } from '../../services/discord-api/dc.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TokenDc } from '../../services/discord-api/token-dc';
 
 
 @Component({
@@ -25,6 +26,11 @@ export default class LoginUsuarioComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/panel-user');
     }
+  }
+
+  traerCookie(){
+    console.log(this.discordService.getToken());
+    
   }
 
 }

@@ -1,13 +1,16 @@
 import Cookies from 'js-cookie';
 
+
 export class TokenDc {
   
   getToken() {
-    return Cookies.get('discordToken');
+    const token = Cookies.get('discordToken');
+    
+    return token;
   }
   
-  setToken( token: string ){
-    Cookies.set('discordToken', token);
+  setToken( discordToken: string ){
+    Cookies.set('discordToken', discordToken);
   }
 
 }
