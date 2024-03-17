@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { GLOBAL } from '../../../../services/GLOBAL';
 import { NgFor, NgIf } from '@angular/common';
@@ -16,7 +16,7 @@ export default class NavComponent implements OnInit {
   public token;
   public id;
   public user: any = undefined;
-  public user_lc: any = undefined;
+  public user_lc: any = signal;
 
   public url;
   constructor(private _usuarioService: UsuarioService,
