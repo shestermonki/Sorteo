@@ -33,7 +33,9 @@ export default class LoginAdminComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.token) {
-      this._router.navigate(['/admin/dashboard']);
+      console.log(this.token);
+      
+      this._router.navigate(['admin','dashboard']);
     } else {
       //MANTENER EN EL COMPONENTE
     }
@@ -56,7 +58,7 @@ export default class LoginAdminComponent implements OnInit {
             this.usuario = response.data;
             localStorage.setItem('token', response.token);
             localStorage.setItem('_id', response.data._id);
-            this._router.navigate(['/dashboard']);
+            this._router.navigate(['admin','dashboard']);
           }
         },
         error => {

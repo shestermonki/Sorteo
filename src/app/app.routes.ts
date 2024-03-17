@@ -25,7 +25,7 @@ export const routes: Routes = [
           { path: '', redirectTo: 'newsorteo', pathMatch: 'full' }
         ]
       },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+      { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },{
     path: 'login-usuario',
