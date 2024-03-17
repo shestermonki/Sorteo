@@ -104,8 +104,19 @@ export class AdminService {
     return this._http.put(this.url + 'eliminar_imagen_galeria_admin/' + id, data, { headers: headers });
   }
 
-  createsorteo(data: Sorteos,token: string):Observable<any>{
-    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
-    return this._http.post(this.url+'createsorteo',data,{headers:headers});
+  createsorteo(data: Sorteos, token: string): Observable<any> {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.post(this.url + 'createsorteo', data, { headers: headers });
+  }
+
+
+  actualizar_sorteo_admin(id: string, data: any, token: any): Observable<any> {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.put(this.url + 'actualizar_sorteo_admin/' + id, data, { headers: headers });
+  }
+
+  eliminar_sorteo_admin(id: string, token: any): Observable<any> {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.delete(this.url + 'eliminar_sorteo_admin/' + id, { headers: headers });
   }
 }

@@ -87,4 +87,20 @@ export default class DashboardComponent implements OnInit {
     )
   }
 
+  eliminarSorteo(id: string) {
+    this._adminService.eliminar_sorteo_admin(id, this.token).subscribe(
+      response => {
+
+        $('#delete-' + id).modal('hide');
+        $('.modal-backdrop').removeClass('show');
+
+        this.init_Data();
+
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
 }

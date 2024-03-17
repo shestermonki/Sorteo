@@ -22,10 +22,11 @@ import { ErrorMessageDirective } from '../../../directives/errorMessage.directiv
 })
 export default class NewSorteoAdminComponent implements OnInit {
 
-  public isEdit = signal( false );
+  public isEdit = signal(false);
   public title = signal('Registro de Sorteo');
   public textButton = signal('Guardar');
   public load_btn = signal(false);
+  public id: string | undefined;
 
   public token: any;
   public forma!: FormGroup;
@@ -34,7 +35,7 @@ export default class NewSorteoAdminComponent implements OnInit {
     private _adminService: AdminService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    private _fb : FormBuilder,
+    private _fb: FormBuilder,
   ) {
     this.token = this._adminService.getToken();
   }
@@ -44,54 +45,54 @@ export default class NewSorteoAdminComponent implements OnInit {
     this.getSorteoById();
   }
 
-  initForma(){
+  initForma() {
     this.forma = this._fb.group({
-      name: ['', [ Validators.required ]],
+      name: ['', [Validators.required]],
       description: '',
-      prize: [ 0, [ Validators.required, Validators.min(0) ]],
-      startDate: [ '', [ Validators.required ] ],
-      endDate: [ '', [ Validators.required ]],
+      prize: [0, [Validators.required, Validators.min(0)]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
     });
   }
 
-  getSorteoById(){
-    this._activatedRoute.params.subscribe( param =>{
+  getSorteoById() {
+    this._activatedRoute.params.subscribe(param => {
       const { id } = param;
 
       if (!id) return;
-      
-      this.isEdit.set( true );
-      this.title.set( 'Edición de Sorteo' );
-      this.textButton.set( 'Editar' );
-      this._adminService.obtener_sorteo_admin( id, this.token ).subscribe( sorteo =>{
+      this.id = id;
+      this.isEdit.set(true);
+      this.title.set('Edición de Sorteo');
+      this.textButton.set('Editar');
+      this._adminService.obtener_sorteo_admin(id, this.token).subscribe(sorteo => {
         const objSorteo = sorteo.data as Sorteos;
 
-        this.patchForma( objSorteo );
+        this.patchForma(objSorteo);
       });
 
     });
   }
 
-  patchForma( sorteo: Sorteos ){
-    this.forma.patchValue( sorteo );
+  patchForma(sorteo: Sorteos) {
+    this.forma.patchValue(sorteo);
   }
 
-  validarForma(){
+  validarForma() {
     if (this.forma.invalid) return;
-    this.load_btn.set( true );
+    this.load_btn.set(true);
 
     (this.isEdit())
-    ? this.editSorteo()
-    : this.saveSorteo();
+      ? this.editSorteo()
+      : this.saveSorteo();
 
   }
-  
-  saveSorteo(){
+
+  saveSorteo() {
     const sorteos = this.forma.value as Sorteos;
 
     this._adminService.createsorteo(sorteos, this.token).subscribe({
       next: () => {
-        this.load_btn.set( false );
+        this.load_btn.set(false);
         this._router.navigate(['/admin/dashboard']);
       },
       error: (error) => {
@@ -100,8 +101,22 @@ export default class NewSorteoAdminComponent implements OnInit {
     });
   }
 
-  editSorteo(){
-  
+  editSorteo() {
+    const sorteos = this.forma.value as Sorteos;
+    if (this.id !== undefined) {
+      this._adminService.actualizar_sorteo_admin(this.id, sorteos, this.token).subscribe({
+        next: () => {
+          this.load_btn.set(false);
+          this._router.navigate(['/admin/dashboard']);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      }
+      );
+    }
   }
+
+
 
 }
