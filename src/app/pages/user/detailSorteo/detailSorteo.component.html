@@ -1,0 +1,9 @@
+
+@if (respRegisterSorteo()?.status === 'NOTSERVER') {
+  <div class="card-invitation">
+    <a href="https://discord.com/invite/pBjEVYTC7t">Ingresa a nuestro Servidor</a>
+  </div>
+}
+
+<app-toast [toggleToast]="toggleToast()"
+  [respRegisterSorteo]="respRegisterSorteo()"></app-toast>

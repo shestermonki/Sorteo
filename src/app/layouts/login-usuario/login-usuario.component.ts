@@ -23,7 +23,7 @@ export default class LoginUsuarioComponent implements OnInit {
     if (!this.discordService.verificarAutenticacion()) {
       window.location.href = this.discordService.getUrlAuthDiscord();
     } else {
-      this.router.navigateByUrl('/sorteo');
+      this.router.navigateByUrl('/panel-user');
     }
   }
 

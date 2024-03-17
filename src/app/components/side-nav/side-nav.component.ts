@@ -18,8 +18,11 @@ export interface SideNavList {
   styleUrl: './side-nav.component.css'
 })
 export default class SideNavComponent implements OnInit {
-
-  @Input() listLinks: SideNavList[] = [];
+  
+  public navLinks: SideNavList[] = [
+    {name: 'Crear Sorteos', link: '/panel/newsorteo'},
+    {name: 'Galeria Sorteos', link: ''},
+  ]
 
   constructor() { }
 

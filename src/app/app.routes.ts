@@ -15,18 +15,32 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () => import('./layouts/login-admin/login-admin.component'),
-  },
-  {
+  },{
     path: 'dashboard', canActivate: [AdminGuard],
     loadComponent: () => import('./layouts/dashboard/dashboard.component'),
-  },
-
-  {
+  },{
     path: 'login-usuario',
     loadComponent: () => import('./layouts/login-usuario/login-usuario.component'),
   }, {
-    path: 'sorteo',
-    loadComponent: () => import('./pages/user/sorteo/listSorteo.component'),
+    path: 'panel-user',
+    loadComponent: () => import('./layouts/layoutUser/layoutUser.component'),
+    children: [
+      {
+        path: 'list-sorteos',
+        loadComponent: ()=> import('./pages/user/sorteo/listSorteo.component'),
+      },{
+        path: 'detail-sorteo/:id',
+        loadComponent: ()=> import('./pages/user/detailSorteo/detailSorteo.component'),
+      },{
+        path: '',
+        redirectTo: 'list-sorteos',
+        pathMatch: 'full'
+      },{
+        path: '**',
+        redirectTo: 'list-sorteos',
+      }
+    ],
+
   }, {
     path: 'redirect/:token',
     loadComponent: () => import('./pages/user/redirect/redirect.component'),

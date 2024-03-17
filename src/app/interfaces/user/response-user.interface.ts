@@ -1,4 +1,4 @@
-export interface ResponseDateUser {
+export interface ResponseDataUser {
   id:                     string;
   username:               string;
   avatar:                 string;

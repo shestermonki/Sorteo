@@ -1,5 +1,3 @@
-<app-header [user]="user()"></app-header>
-
 <div class="contain-sorteos">
   <div class="card-sorteos h-100">
     <div class="contain-description">
@@ -25,7 +23,7 @@
               <div>regalo 4</div>
             </div>
           </div>
-          <button (click)="participarSorteo(sorteo._id)"
+          <button [routerLink]="'/panel-user/detail-sorteo/' + sorteo._id"
           class="btn btn-primary" type="button">
             Ir al Sorteo
           </button>
@@ -36,13 +34,3 @@
     </div>
   </div>
 </div>
-
-@if (respRegisterSorteo()?.status === 'NOTSERVER') {
-  <div class="card-invitation">
-    <a href="https://discord.com/invite/pBjEVYTC7t">Ingresa a nuestro Servidor</a>
-  </div>
-}
-
-<app-toast [toggleToast]="toggleToast()"
-  [respRegisterSorteo]="respRegisterSorteo()"></app-toast>
-<app-spinner [isLoading]="pageLoading()" />

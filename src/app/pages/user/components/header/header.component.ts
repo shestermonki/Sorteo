@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
-import { ResponseDateUser } from '../../../../interfaces/user/response-user.interface';
+import { ResponseDataUser } from '../../../../interfaces/user/response-user.interface';
 import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -16,16 +16,16 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class HeaderComponent {
 
-  public _user?: ResponseDateUser;
+  public _user?: ResponseDataUser;
   public srcAvatar = signal<string>('https://cdn.discordapp.com/avatars/');
-  @Input({required: true}) set user( user: ResponseDateUser | null ){
+  @Input({required: true}) set user( user: ResponseDataUser | null ){
     if (!user) return;
 
     this._user = user;
     this.setAvatarUser( user );
   };
   
-  setAvatarUser( user: ResponseDateUser ){
+  setAvatarUser( user: ResponseDataUser ){
     const { id, avatar } = user;
     if (avatar) {
       this.srcAvatar.update( value => value + `${id}/${avatar}`);

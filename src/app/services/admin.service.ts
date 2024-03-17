@@ -4,6 +4,7 @@ import { GLOBAL } from "./GLOBAL";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
+import { Users } from '../interfaces/admin/response-data-user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -59,9 +60,9 @@ export class AdminService {
     return allowRoles.includes(decodedToken['rol']);
   }
 
-  listar_usuarios_admin(token: any): Observable<any> {
+  listar_usuarios_admin(token: any): Observable<Users[]> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
-    return this._http.get(this.url + 'listarUsuariosAdmin', { headers: headers });
+    return this._http.get<Users[]>(this.url + 'listarUsuariosAdmin', { headers: headers });
   }
 
   listar_sorteos_admin(): Observable<any[]> {

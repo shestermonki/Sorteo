@@ -4,6 +4,8 @@ import SideNavComponent, { SideNavList } from '../../components/side-nav/side-na
 import { AdminService } from '../../services/admin.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Users } from '../../interfaces/admin/response-data-user.interface';
+import { Sorteos } from '../../interfaces/admin/response-sorteos.interface';
 
 //declare var iziToast;
 declare var jQuery: any;
@@ -22,14 +24,9 @@ declare var $: any;
   styleUrl: './dashboard.component.css'
 })
 export default class DashboardComponent implements OnInit {
-  
-  public navLinks: SideNavList[] = [
-    {name: 'Crear Sorteos', link: '/panel/newsorteo'},
-    {name: 'Galeria Sorteos', link: ''},
-  ]
 
-  public usuarios: Array<any> = [];
-  public sorteos: Array<any> = [];
+  public usuarios: Users[] = [];
+  public sorteos: Sorteos[] = [];
 
   public page = 1;
   public pageSize = 20;
@@ -46,29 +43,32 @@ export default class DashboardComponent implements OnInit {
   }
 
   init_Data() {
-    this._adminService.listar_usuarios_admin(this.token).subscribe(
-      response => {
+    this.getListSorteos();
+    this.getListUsers();
+  }
 
-        this.usuarios = response.data;
+  getListSorteos(){
+    this._adminService.listar_sorteos_admin().subscribe({
+      next: (response) => {
+        this.sorteos = response;
         this.load_data = false;
-        console.log(this.usuarios);
       },
-      error => {
-        console.log(error);
-
-      }
-    );
-
-    this._adminService.listar_sorteos_admin().subscribe(
-      response => {
-        this.sorteos = response; // Aquí asignamos directamente la respuesta a this.sorteos
-        this.load_data = false;
-        console.log(this.sorteos);
-      },
-      error => {
+      error: (error) => {
         console.log(error);
       }
-    );
+    });
+  }
+
+  getListUsers(){
+    this._adminService.listar_usuarios_admin(this.token).subscribe({
+      next: users => {
+        this.usuarios = users;
+        this.load_data = false;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 
   eliminar(id: string) {

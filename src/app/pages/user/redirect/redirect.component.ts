@@ -24,7 +24,7 @@ export default class RedirectComponent implements OnInit{
       if (!token) this.router.navigateByUrl( '/login-usuario' );
 
       this.tokenDc.setToken(token);
-      this.router.navigateByUrl( '/sorteo' );
+      this.router.navigateByUrl( '/panel-user' );
     });
   }
 
