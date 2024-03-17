@@ -6,6 +6,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { Users } from '../interfaces/admin/response-data-user.interface';
 import { Sorteos } from '../interfaces/admin/response-sorteos.interface';
+import { Admins } from '../interfaces/admin/response-admins.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -99,6 +100,11 @@ export class AdminService {
     return this._http.get(this.url + 'obtener_sorteo_admin/' + id, { headers: headers });
   }
 
+  obtener_admin(id: string, token: any): Observable<any> {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.get(this.url + 'obtener_admin/' + id, { headers: headers });
+  }
+
   eliminar_imagen_galeria_admin(id: string, data: any, token: any): Observable<any> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this._http.put(this.url + 'eliminar_imagen_galeria_admin/' + id, data, { headers: headers });
@@ -109,6 +115,10 @@ export class AdminService {
     return this._http.post(this.url + 'createsorteo', data, { headers: headers });
   }
 
+  registroAdmin(data: Admins, token: string): Observable<any> {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.post(this.url + 'registroAdmin', data, { headers: headers });
+  }
 
   actualizar_sorteo_admin(id: string, data: any, token: any): Observable<any> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
@@ -119,4 +129,10 @@ export class AdminService {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this._http.delete(this.url + 'eliminar_sorteo_admin/' + id, { headers: headers });
   }
+
+  actualizar_admin(id: string, data: any, token: any): Observable<any> {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.put(this.url + 'actualizar_admin/' + id, data, { headers: headers });
+  }
+
 }

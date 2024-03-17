@@ -3,8 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 export interface SideNavList {
-  name  : string;
-  link  : string;
+  name: string;
+  link: string;
 }
 
 @Component({
@@ -18,10 +18,10 @@ export interface SideNavList {
   styleUrl: './side-nav.component.css'
 })
 export default class SideNavComponent implements OnInit {
-  
+
   public navLinks: SideNavList[] = [
-    {name: 'Crear Sorteos', link: '/admin/panel/newsorteo'},
-    {name: 'Crear Admin', link: '/login'},
+    { name: 'Crear Sorteos', link: '/admin/panel/newsorteo' },
+    { name: 'Crear Admin', link: '/admin/panel/newadmin' },
   ]
 
   constructor() { }

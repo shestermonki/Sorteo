@@ -1,0 +1,51 @@
+<!-- Page title-->
+<div class="border-bottom mb-5">
+  <h1 class="mb-3">Admin</h1>
+</div>
+
+<form [formGroup]="forma" (ngSubmit)="validarForma()">
+  <div class="card box-shadow-sm m-4">
+    <div class="card-header">
+      <h5 style="margin-bottom: 0px;">{{ title() }}</h5>
+    </div>
+    <div class="card-body">
+
+      <div class="row px-5">
+        <div class="col-md-12 form-group my-2">
+          <label for="validationCustom01" class="form-label">Username</label>
+          <input class="form-control" type="text" placeholder="Username" name="username" formControlName="username">
+          @if (isValid('username')) { <span class="text-danger">{{ getMessageError('username') }}</span> }
+        </div>
+        <div class="col-md-12 form-group my-2">
+          <label for="validationCustom01" class="form-label">Email</label>
+          <input class="form-control" type="text" placeholder="Email" name="email" formControlName="email">
+          @if (isValid('email')) { <span class="text-danger">{{ getMessageError('email') }}</span> }
+        </div>
+        <div class="col-md-12 form-group my-2">
+          <label for="validationCustom01" class="form-label">Password</label>
+          <input class="form-control" type="text" placeholder="Password" name="password" formControlName="password">
+          @if (isValid('password')) { <span class="text-danger">{{ getMessageError('password') }}</span> }
+        </div>
+        <div class="col-md-12 form-group my-2">
+          <label for="validationCustom01" class="form-label">Rol</label>
+          <input class="form-control" type="text" placeholder="Rol" name="rol" formControlName="rol">
+          @if (isValid('rol')) { <span class="text-danger">{{ getMessageError('rol') }}</span> }
+        </div>
+      </div>
+
+    </div>
+    <div class="card-footer p-2 d-flex gap-2">
+      @if (!load_btn()) {
+      <button class="btn btn-primary mr-3" type="submit">
+        {{ textButton() }}
+      </button>
+      }@else {
+      <button type="button" class="btn btn-secondary" disabled>
+        <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
+        Guardando...
+      </button>
+      }
+      <a [routerLink]="['/admin/dashboard']" class="btn btn-warning">Regresar</a>
+    </div>
+  </div>
+</form>
