@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject, signal } from '@angular/core';
 import { ResponseDataUser } from '../../../../interfaces/user/response-user.interface';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AdminService } from '../../../../services/admin.service';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +18,10 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 export class HeaderComponent {
 
   public _user?: ResponseDataUser;
+  private _router = inject( Router );
   public srcAvatar = signal<string>('https://cdn.discordapp.com/avatars/');
+
+
   @Input({required: true}) set user( user: ResponseDataUser | null ){
     if (!user) return;
 
@@ -29,9 +33,13 @@ export class HeaderComponent {
     const { id, avatar } = user;
     if (avatar) {
       this.srcAvatar.update( value => value + `${id}/${avatar}`);
-    }else{
-      // Añadir una img default si no tiene avatar
     }
+  }
+
+  logout() {
+    window.location.reload();
+    localStorage.clear();
+    this._router.navigate(['/login']);
   }
 
 }

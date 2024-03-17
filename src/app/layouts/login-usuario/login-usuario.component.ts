@@ -16,15 +16,20 @@ import { TokenDc } from '../../services/discord-api/token-dc';
 })
 export default class LoginUsuarioComponent implements OnInit {
   
-  constructor(private discordService: DiscordService, private router: Router) { }
+  constructor(private discordService: DiscordService, private _router: Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    const token = localStorage.getItem('token')!;
+    if (token) {
+      this._router.navigate(['/panel-user/list-sorteos']);
+    }
+  }
 
   loginByDiscord() {
     if (!this.discordService.verificarAutenticacion()) {
       window.location.href = this.discordService.getUrlAuthDiscord();
     } else {
-      this.router.navigateByUrl('/panel-user');
+      this._router.navigateByUrl('/panel-user');
     }
   }
 

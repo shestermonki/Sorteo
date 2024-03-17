@@ -4,13 +4,11 @@ import Cookies from 'js-cookie';
 export class TokenDc {
 
   getToken() {
-    const token = Cookies.get('discordToken');
-    
-    return token;
+    return localStorage.getItem( 'token' );
   }
   
   setToken( discordToken: string ){
-    Cookies.set('discordToken', discordToken);
+    localStorage.setItem( 'token', discordToken );
   }
 
 }
