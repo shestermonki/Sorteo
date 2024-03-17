@@ -47,7 +47,7 @@ export default class NewSorteoAdminComponent implements OnInit {
 
   initForma() {
     this.forma = this._fb.group({
-      name: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.minLength(3)]],
       description: '',
       prize: [0, [Validators.required, Validators.min(0)]],
       startDate: ['', [Validators.required]],
