@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { environments } from '../../../../environments';
 import { ApiService } from '../api.service';
-import { Observable, tap } from 'rxjs';
+import { Observable, catchError, lastValueFrom, map, of, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenDc } from './token-dc';
@@ -30,6 +30,7 @@ export class DiscordService {
 
   getUrlAuthDiscord() {
     if (!this.usuarioLogueado) {
+      
       return `${this.dcUrl}/oauth2/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=${this.redirectUri}&scope=${this.scope}`;
     } else {
       return ''; // Otra URL o una cadena vacía, según sea necesario
@@ -42,32 +43,22 @@ export class DiscordService {
     return this.http.get<ResponseDataUser>(`${this.dcUrl}/api/v10/users/@me`, {headers});
   }
 
-  public isAuthenticated(allowRoles: string[]): boolean {
+  public async isAuthenticated(): Promise<boolean> {
     const token = this.tokenDc.getToken();
+
     if (!token) {
       return false;
     }
 
     try {
-      const helper = new JwtHelperService();
-      var decodedToken = helper.decodeToken(token);
+      
+      const user$ = this.getDataUser();
+      const dataUser = await lastValueFrom( user$ );
 
-      if (helper.isTokenExpired(token)) {
-        localStorage.clear();
-        return false;
-      }
-
-      if (!decodedToken) {
-        console.log('NO ES VALIDO');
-        localStorage.removeItem('token');
-        return false;
-      }
+      return dataUser ? true : false;
     } catch (error) {
-      localStorage.removeItem('token');
       return false;
     }
-
-    return allowRoles.includes(decodedToken['rol']);
   }
 
 }
