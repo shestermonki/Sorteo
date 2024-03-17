@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { GLOBAL } from '../../services/GLOBAL';
+import { GLOBAL } from '../../../../services/GLOBAL';
 import { NgFor, NgIf } from '@angular/common';
-import { UsuarioService } from '../../services/usuario.service';
+import { UsuarioService } from '../../../../services/usuario.service';
 
 @Component({
   selector: 'app-nav',

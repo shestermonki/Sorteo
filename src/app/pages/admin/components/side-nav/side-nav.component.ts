@@ -20,8 +20,8 @@ export interface SideNavList {
 export default class SideNavComponent implements OnInit {
   
   public navLinks: SideNavList[] = [
-    {name: 'Crear Sorteos', link: '/panel/newsorteo'},
-    {name: 'Galeria Sorteos', link: ''},
+    {name: 'Crear Sorteos', link: '/admin/panel/newsorteo'},
+    {name: 'Crear Admin', link: '/login'},
   ]
 
   constructor() { }

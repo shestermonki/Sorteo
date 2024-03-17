@@ -1,0 +1,68 @@
+<!-- Page title-->
+<div class="border-bottom mb-5">
+  <h1 class="mb-3">Sorteo</h1>
+</div>
+
+<form [formGroup]="forma" (ngSubmit)="validarForma()">
+  <div class="card box-shadow-sm m-4">
+    <div class="card-header">
+      <h5 style="margin-bottom: 0px;">{{ title() }}</h5>
+    </div>
+    <div class="card-body">
+
+      <div class="row px-5">
+        <div class="col-md-12 form-group my-2">
+          <label for="validationCustom01" class="form-label">Nombre</label>
+          <input class="form-control" type="text" placeholder="Nombre" name="name"
+            formControlName="name">
+            <span class="text-danger"
+            appErrorMessage [errors]="forma.get('name')?.errors"></span>
+        </div>
+        <div class="col-md-12 form-group my-2">
+          <label for="validationCustom01" class="form-label">Descripcion</label>
+          <input class="form-control" type="text" placeholder="Descripcion" name="description"
+            formControlName="description">
+            <span class="text-danger"
+            appErrorMessage [errors]="forma.get('description')?.errors"></span>
+        </div>
+        <div class="col-md-12 form-group my-2">
+          <label for="validationCustom01" class="form-label">Prize</label>
+          <input class="form-control" type="number" placeholder="Prize" name="prize"
+          formControlName="prize">
+          <span class="text-danger"
+            appErrorMessage [errors]="forma.get('prize')?.errors"></span>
+        </div>
+
+        <div class="col-md-12 form-group my-2">
+          <label for="validationCustom01" class="form-label">Start Date</label>
+          <input class="form-control" type="date" placeholder="Prize" name="startDate"
+          formControlName="startDate">
+          <span class="text-danger"
+            appErrorMessage [errors]="forma.get('startDate')?.errors"></span>
+        </div>
+
+        <div class="col-md-12 form-group my-2">
+          <label for="validationCustom01" class="form-label">End Date</label>
+          <input class="form-control" type="date" placeholder="Prize" name="endDate"
+          formControlName="endDate">
+          <span class="text-danger"
+            appErrorMessage [errors]="forma.get('endDate')?.errors"></span>
+        </div>
+      </div>
+
+    </div>
+    <div class="card-footer p-2 d-flex gap-2">
+      @if (!load_btn()) {
+        <button class="btn btn-primary mr-3" type="submit">
+          {{ textButton() }}
+        </button>
+      }@else {
+        <button type="button" class="btn btn-secondary" disabled>
+          <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
+          Guardando...
+        </button>
+      }
+      <a [routerLink]="['/admin/dashboard']" class="btn btn-warning">Regresar</a>
+    </div>
+  </div>
+</form>

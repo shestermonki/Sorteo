@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import NavComponent from '../../components/nav/nav.component';
-import SideNavComponent, { SideNavList } from '../../components/side-nav/side-nav.component';
-import { AdminService } from '../../services/admin.service';
+import { Component, OnInit, signal } from '@angular/core';
+import NavComponent from '../components/nav/nav.component';
+import SideNavComponent, { SideNavList } from '../components/side-nav/side-nav.component';
+import { AdminService } from '../../../services/admin.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Users } from '../../interfaces/admin/response-data-user.interface';
-import { Sorteos } from '../../interfaces/admin/response-sorteos.interface';
+import { Users } from '../../../interfaces/admin/response-data-user.interface';
+import { Sorteos } from '../../../interfaces/admin/response-sorteos.interface';
 
 //declare var iziToast;
 declare var jQuery: any;
@@ -25,8 +25,8 @@ declare var $: any;
 })
 export default class DashboardComponent implements OnInit {
 
-  public usuarios: Users[] = [];
-  public sorteos: Sorteos[] = [];
+  public usuarios = signal<Users[]>([]);
+  public sorteos = signal<Sorteos[]>([]);
 
   public page = 1;
   public pageSize = 20;
@@ -49,8 +49,8 @@ export default class DashboardComponent implements OnInit {
 
   getListSorteos(){
     this._adminService.listar_sorteos_admin().subscribe({
-      next: (response) => {
-        this.sorteos = response;
+      next: (sorteos) => {
+        this.sorteos.set( sorteos );
         this.load_data = false;
       },
       error: (error) => {
@@ -62,7 +62,7 @@ export default class DashboardComponent implements OnInit {
   getListUsers(){
     this._adminService.listar_usuarios_admin(this.token).subscribe({
       next: users => {
-        this.usuarios = users;
+        this.usuarios.set( users );
         this.load_data = false;
       },
       error: (error) => {

@@ -1,0 +1,38 @@
+.barnav{
+  position: relative;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-claro);
+}
+.barnav .logo{
+  cursor: pointer;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: var(--text-color);
+}
+i{
+  outline: none;
+  border: none;
+}
+.nav-link{
+  color: var(--text-color);
+}
+
+.list-option{
+  border-radius: 10px;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.activeRouter{
+  background-color: var(--color-principal);
+  color: var(--color-claro) !important;
+  box-shadow: 0 0 2px 0 black;
+}

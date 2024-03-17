@@ -1,0 +1,19 @@
+<nav class="nav barnav">
+  <div class="d-flex gap-2">
+    <a class="logo" routerLink="/admin/dashboard"
+      routerLinkActive="activeRouter">
+      <i class="fa-solid fa-font-awesome"></i>
+    </a>
+    @for (links of navLinks; track $index) {
+      <a class="nav-link list-option" role="button"
+        [routerLink]="links.link" routerLinkActive="activeRouter">
+        {{ links.name }}
+      </a>
+    }
+  </div>
+
+  <a class="nav-link" role="button"
+  [routerLink]="['/login']">
+  <i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i>
+  </a>
+</nav>

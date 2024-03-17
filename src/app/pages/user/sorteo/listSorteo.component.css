@@ -1,55 +1,76 @@
-.contain-sorteos{
-  height: calc(100vh - 120px);
-  padding: 20px;
-  color: var(--color-dark);
-}
-
-.card-sorteos{
-  box-shadow: 0.4px 0.9px 2px 0 black;
-  border-radius: 10px;
-}
-
-.contain-description{
-  display: flex;
+ul{
+ 
   justify-content: center;
-  flex-wrap: wrap;
-  padding: 10px 0;
-  height: 100%;
+  margin-top: 20px;
+  padding-left: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+
 }
 
-.card-regalos{
-  max-width: 500px;
-  height: max-content;
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 20px;
+.card{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    background-color: var(--color-dark); 
+    opacity: 0.9;
+    
+    /* background-image: url('path-to-your-image.jpg'); */
+    /* background-blend-mode: overlay; */
+   
 }
 
-.card-invitation{
-  background-color: var(--color-principal);
-  padding: 10px 0;
-  text-align: center;
+.card:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0);
+    transform: scale(1.03);
 }
 
-a{
-  text-decoration: none;
-  color: #fff;
+.card .text-xl{
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-color);
+    text-align: center;
 }
 
-a:hover{
-  color: #4488ee;
+.card p, span{
+
+    color: var(--text-color);
+    font-size: 1rem;
+    text-align: left;
+    
 }
 
-@media screen and (max-width: 920px) {
-  .contain-description{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
+@media (min-width: 500px){
 
-  }
-
-  .contain-description .card-regalos{
-    width: 95%;
-  }
+    ul{
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .card{
+        max-width: 300px;
+      
+    }
+  
 }
+
+.card button{
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--color-secundario);
+    color: var(--text-color);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.card button:hover{
+    background-color: var(--color-principal);
+    color: white;
+
+}
+

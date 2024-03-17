@@ -22,8 +22,6 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SorteoComponent implements OnInit {
-  
-  public urlInvitacion = 'https://discord.com/invite/pBjEVYTC7t';
 
   public listSorteos = signal<ResponseListSorteos[]>([]);
   private sorteosService = inject( SorteosService );

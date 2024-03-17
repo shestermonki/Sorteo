@@ -1,36 +1,26 @@
-<div class="contain-sorteos">
-  <div class="card-sorteos h-100">
-    <div class="contain-description">
-      @for (sorteo of listSorteos(); track $index) {
-        <div class="card-regalos">
-          <div class="d-flex justify-content-between">
-            <h2 class="">{{ sorteo.name }}</h2>
-            <div>
-              <div>Del: {{ sorteo.startDate | date:'dd/MM/yyyy' }} </div>
-              <div>Al: {{ sorteo.endDate | date:'dd/MM/yyyy' }} </div>
-            </div>
-          </div>
 
-          <hr>
-          
-          <p>{{ sorteo.description }}</p>
-          <div class="list-regalos">
-            <h3>Regalos</h3>
-            <div class="d-flex gap-5">
-              <div>regalo 1</div>
-              <div>regalo 2</div>
-              <div>regalo 3</div>
-              <div>regalo 4</div>
-            </div>
-          </div>
-          <button [routerLink]="'/panel-user/detail-sorteo/' + sorteo._id"
-          class="btn btn-primary" type="button">
-            Ir al Sorteo
-          </button>
-        </div>
-      }@empty {
-        
-      }
-    </div>
+<ul class="row">
+  @for (sorteo of listSorteos(); track $index) {
+     <li class="card d-flex flex-column justify-content-center gap-3 mt-10 ">
+  <h2 class="text-xl">{{ sorteo.name }}</h2>
+
+  <p>{{ sorteo.description }}</p>
+
+  <button routerLink="/panel-user/detail-sorteo/{{sorteo._id}}">
+    Ir al sorteo
+  </button>
+  <div class="d-flex justify-content-center gap-4">
+    <span>
+      {{ sorteo.startDate | date:'dd/MM/yyyy' }}
+    </span>
+    <span>
+      {{ sorteo.endDate | date:'dd/MM/yyyy' }}
+    </span>
   </div>
-</div>
+</li>
+  }@empty {
+        
+  }
+ 
+</ul>
+

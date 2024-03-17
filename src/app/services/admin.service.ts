@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { Users } from '../interfaces/admin/response-data-user.interface';
+import { Sorteos } from '../interfaces/admin/response-sorteos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -103,7 +104,7 @@ export class AdminService {
     return this._http.put(this.url + 'eliminar_imagen_galeria_admin/' + id, data, { headers: headers });
   }
 
-  createsorteo(data: any,token: any):Observable<any>{
+  createsorteo(data: Sorteos,token: string):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.post(this.url+'createsorteo',data,{headers:headers});
   }

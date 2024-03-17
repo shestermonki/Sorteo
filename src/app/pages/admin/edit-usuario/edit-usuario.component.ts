@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import SideNavComponent from '../../components/side-nav/side-nav.component';
+import SideNavComponent from '../components/side-nav/side-nav.component';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { AdminService } from '../../services/admin.service';
+import { AdminService } from '../../../services/admin.service';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({
