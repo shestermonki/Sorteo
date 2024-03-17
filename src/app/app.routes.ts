@@ -3,7 +3,11 @@ import { AdminGuard } from './guards/admin.guard';
 import EditUsuarioComponent from './pages/admin/edit-usuario/edit-usuario.component';
 import GaleriaProductoComponent from './pages/admin/galeria-sorteo/galeria-sorteo.component';
 import NewSorteoAdminComponent from './pages/admin/new-edit-sorteo-admin/new-sorteo-admin.component';
+
 import NewEditAdminComponent from './pages/admin/new-edit-admin/new-edit-admin.component';
+
+import { userGuard } from './guards/user.guard';
+
 
 export const routes: Routes = [
   {
@@ -35,6 +39,7 @@ export const routes: Routes = [
     loadComponent: () => import('./layouts/login-usuario/login-usuario.component'),
   }, {
     path: 'panel-user',
+    canActivate: [userGuard],
     loadComponent: () => import('./layouts/layoutUser/layoutUser.component'),
     children: [
       {

@@ -14,22 +14,22 @@
         <div class="col-md-12 form-group my-2">
           <label for="validationCustom01" class="form-label">Username</label>
           <input class="form-control" type="text" placeholder="Username" name="username" formControlName="username">
-          <span class="text-danger" appErrorMessage [errors]="forma.get('username')?.errors"></span>
+          @if (isValid('username')) { <span class="text-danger">{{ getMessageError('username') }}</span> }
         </div>
         <div class="col-md-12 form-group my-2">
           <label for="validationCustom01" class="form-label">Email</label>
           <input class="form-control" type="text" placeholder="Email" name="email" formControlName="email">
-          <span class="text-danger" appErrorMessage [errors]="forma.get('email')?.errors"></span>
+          @if (isValid('email')) { <span class="text-danger">{{ getMessageError('email') }}</span> }
         </div>
         <div class="col-md-12 form-group my-2">
           <label for="validationCustom01" class="form-label">Password</label>
           <input class="form-control" type="text" placeholder="Password" name="password" formControlName="password">
-          <span class="text-danger" appErrorMessage [errors]="forma.get('password')?.errors"></span>
+          @if (isValid('password')) { <span class="text-danger">{{ getMessageError('password') }}</span> }
         </div>
         <div class="col-md-12 form-group my-2">
           <label for="validationCustom01" class="form-label">Rol</label>
           <input class="form-control" type="text" placeholder="Rol" name="rol" formControlName="rol">
-          <span class="text-danger" appErrorMessage [errors]="forma.get('rol')?.errors"></span>
+          @if (isValid('rol')) { <span class="text-danger">{{ getMessageError('rol') }}</span> }
         </div>
       </div>
 

@@ -5,7 +5,7 @@ import NavComponent from '../components/nav/nav.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Sorteos } from '../../../interfaces/admin/response-sorteos.interface';
-import { ErrorMessageDirective } from '../../../directives/errorMessage.directive';
+import { ValidatorsService } from '../../../services/validators.service';
 
 @Component({
   selector: 'app-new-sorteo-admin',
@@ -15,7 +15,6 @@ import { ErrorMessageDirective } from '../../../directives/errorMessage.directiv
     NavComponent,
     ReactiveFormsModule,
     RouterLink,
-    ErrorMessageDirective,
   ],
   templateUrl: './new-edit-sorteo-admin.component.html',
   styleUrl: './new-edit-sorteo-admin.component.css'
@@ -36,6 +35,7 @@ export default class NewSorteoAdminComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _fb: FormBuilder,
+    private _validatorsService: ValidatorsService,
   ) {
     this.token = this._adminService.getToken();
   }
@@ -117,6 +117,7 @@ export default class NewSorteoAdminComponent implements OnInit {
     }
   }
 
-
+  isValid = (field: string): boolean | null => this._validatorsService.isValid( this.forma, field );
+  getMessageError = ( field: string ) => this._validatorsService.getMessageError(this.forma, field);
 
 }

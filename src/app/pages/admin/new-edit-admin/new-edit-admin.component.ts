@@ -2,10 +2,11 @@ import { Component, OnInit, signal } from '@angular/core';
 import NavComponent from '../components/nav/nav.component';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ErrorMessageDirective } from '../../../directives/errorMessage.directive';
+//import { ErrorMessageDirective } from '../../../directives/errorMessage.directive';
 import { Admins } from '../../../interfaces/admin/response-admins.interface';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
+import { ValidatorsService } from '../../../services/validators.service';
 
 @Component({
   selector: 'app-new-edit-admin',
@@ -14,7 +15,7 @@ import { AdminService } from '../../../services/admin.service';
     NavComponent,
     ReactiveFormsModule,
     RouterLink,
-    ErrorMessageDirective,],
+  ],
   templateUrl: './new-edit-admin.component.html',
   styleUrl: './new-edit-admin.component.css'
 })
@@ -34,6 +35,7 @@ export default class NewEditAdminComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _fb: FormBuilder,
+    private _validatorsService: ValidatorsService
   ) {
     this.token = this._adminService.getToken();
   }
@@ -113,4 +115,8 @@ export default class NewEditAdminComponent implements OnInit {
       );
     }
   }
+
+  isValid = (field: string): boolean | null => this._validatorsService.isValid(this.forma, field);
+  getMessageError = (field: string) => this._validatorsService.getMessageError(this.forma, field);
 }
+

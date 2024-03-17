@@ -15,38 +15,33 @@
           <label for="validationCustom01" class="form-label">Nombre</label>
           <input class="form-control" type="text" placeholder="Nombre" name="name"
             formControlName="name">
-            <span class="text-danger"
-            appErrorMessage [errors]="forma.get('name')?.errors"></span>
+            @if (isValid('name')) { <span class="text-danger">{{ getMessageError('name') }}</span> }
         </div>
         <div class="col-md-12 form-group my-2">
           <label for="validationCustom01" class="form-label">Descripcion</label>
           <input class="form-control" type="text" placeholder="Descripcion" name="description"
             formControlName="description">
-            <span class="text-danger"
-            appErrorMessage [errors]="forma.get('description')?.errors"></span>
+            @if (isValid('description')) { <span class="text-danger">{{ getMessageError('description') }}</span> }
         </div>
         <div class="col-md-12 form-group my-2">
           <label for="validationCustom01" class="form-label">Prize</label>
           <input class="form-control" type="number" placeholder="Prize" name="prize"
           formControlName="prize">
-          <span class="text-danger"
-            appErrorMessage [errors]="forma.get('prize')?.errors"></span>
+          @if (isValid('prize')) { <span class="text-danger">{{ getMessageError('prize') }}</span> }
         </div>
 
         <div class="col-md-12 form-group my-2">
           <label for="validationCustom01" class="form-label">Start Date</label>
           <input class="form-control" type="date" placeholder="Prize" name="startDate"
           formControlName="startDate">
-          <span class="text-danger"
-            appErrorMessage [errors]="forma.get('startDate')?.errors"></span>
+          @if (isValid('startDate')) { <span class="text-danger">{{ getMessageError('startDate') }}</span> }
         </div>
 
         <div class="col-md-12 form-group my-2">
           <label for="validationCustom01" class="form-label">End Date</label>
           <input class="form-control" type="date" placeholder="Prize" name="endDate"
           formControlName="endDate">
-          <span class="text-danger"
-            appErrorMessage [errors]="forma.get('endDate')?.errors"></span>
+          @if (isValid('endDate')) { <span class="text-danger">{{ getMessageError('endDate') }}</span> }
         </div>
       </div>
 
