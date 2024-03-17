@@ -23,7 +23,7 @@
     <li class="nav-item d-lg-block d-none dropdown">
       <a class="nav-tool dropdown-toggle" toggle="dropdown" style="cursor: pointer;">
         <i class="cxi-profile nav-tool-icon"></i>
-        <span class="nav-tool-label" style="font-size: 100;">{{user_lc.username}}</span>
+        <span class="nav-tool-label" style="font-size: 100;">{{user_lc().username}}</span>
       </a>
       <div class="dropdown-menu">
         <a [routerLink]="['/cuenta/perfil']" routerLinkActive="active" class="dropdown-item">
@@ -43,7 +43,7 @@
     </li>
   </ng-container>
 
-  <a class="nav-link" role="button" [routerLink]="['/login']">
+  <a class="nav-link" role="button" (click)="logout()">
     <i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i>
   </a>
 </nav>

@@ -1,5 +1,5 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AdminService } from '../../../../services/admin.service';
 import { GLOBAL } from '../../../../services/GLOBAL';
@@ -29,7 +29,7 @@ export default class SideNavComponent implements OnInit {
   public token;
   public id;
   public user: any = undefined;
-  public user_lc: any = undefined;
+  public user_lc = signal<any>({});
   public url;
 
   constructor(private _adminService: AdminService,
@@ -46,8 +46,8 @@ export default class SideNavComponent implements OnInit {
             this.user = response.data;
             localStorage.setItem('user_data', JSON.stringify(this.user));
             console.log('Datos guardados en el almacenamiento local:', this.user);
-            this.user_lc = this.user; // Asigna los datos al usuario localmente
-            console.log('Datos recuperados del almacenamiento local:', this.user_lc);
+            this.user_lc.set(this.user); // Asigna los datos al usuario localmente
+            console.log('Datos recuperados del almacenamiento local:', this.user_lc());
           } else {
             console.error('Error: La respuesta del servidor no contiene los datos esperados.');
           }
