@@ -7,6 +7,7 @@ import NewSorteoAdminComponent from './pages/admin/new-edit-sorteo-admin/new-sor
 import NewEditAdminComponent from './pages/admin/new-edit-admin/new-edit-admin.component';
 
 import { userGuard } from './guards/user.guard';
+import { StartSorteoComponent } from './pages/admin/startSorteo/startSorteo.component';
 
 
 export const routes: Routes = [
@@ -29,6 +30,7 @@ export const routes: Routes = [
           { path: 'editsorteo/:id', component: NewSorteoAdminComponent, canActivate: [AdminGuard] },
           { path: 'newadmin', component: NewEditAdminComponent, canActivate: [AdminGuard] },
           { path: 'editadmin/:id', component: NewEditAdminComponent, canActivate: [AdminGuard] },
+          { path: 'startsorteo', component: StartSorteoComponent, canActivate: [AdminGuard] },
           { path: '', redirectTo: 'newsorteo', pathMatch: 'full' }
         ]
       },

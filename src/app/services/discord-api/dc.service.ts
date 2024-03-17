@@ -8,12 +8,8 @@ import { ResponseDataUser } from '../../interfaces/user/response-user.interface'
 @Injectable({ providedIn: 'root' })
 export class DiscordService {
 
-  private scope = 'identify+guilds+email'; // Si quiere añadir mas scopre añadir con un +
-  private redirectUri = `${environments.baseUrl}/redirect`;
-  private usuarioLogueado: boolean = false;
-
+  private baseUrl = environments.baseUrl;
   private dcUrl    = environments.dcUrl;
-  private clientId = environments.clientId;
 
   private tokenDc: TokenDc = new TokenDc();
   
@@ -27,12 +23,7 @@ export class DiscordService {
   }
 
   getUrlAuthDiscord() {
-    if (!this.usuarioLogueado) {
-      
-      return `${this.dcUrl}/oauth2/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=${this.redirectUri}&scope=${this.scope}`;
-    } else {
-      return ''; // Otra URL o una cadena vacía, según sea necesario
-    }
+    return `${this.baseUrl}/login-usuario`;
   }
 
   getDataUser(): Observable<ResponseDataUser>{

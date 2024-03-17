@@ -3,7 +3,7 @@ import NavComponent from '../components/nav/nav.component';
 import SideNavComponent, { SideNavList } from '../components/side-nav/side-nav.component';
 import { AdminService } from '../../../services/admin.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Users } from '../../../interfaces/admin/response-data-user.interface';
 import { Sorteos } from '../../../interfaces/admin/response-sorteos.interface';
 
@@ -34,7 +34,9 @@ export default class DashboardComponent implements OnInit {
   public load_data = true;
 
   constructor(
-    private _adminService: AdminService) {
+    private _adminService: AdminService,
+    private _router : Router,
+  ) {
     this.token = this._adminService.getToken();
   }
 
@@ -101,6 +103,13 @@ export default class DashboardComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  iniciarSorteo( id: string ){
+    console.log(id);
+    $('#start-' + id).modal('hide');
+    $('.modal-backdrop').removeClass('show');
+    this._router.navigateByUrl( '/admin/panel/startsorteo' );
   }
 
 }
