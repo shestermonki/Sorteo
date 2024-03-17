@@ -49,8 +49,8 @@ export default class NewEditAdminComponent implements OnInit {
   initForma() {
     this.forma = this._fb.group({
       username: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      email: ['', [Validators.required, this._validatorsService.emailValidator]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       rol: ['', [Validators.required]],
     });
   }
