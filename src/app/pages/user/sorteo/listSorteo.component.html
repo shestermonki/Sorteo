@@ -1,26 +1,35 @@
-
 <ul class="row">
   @for (sorteo of listSorteos(); track $index) {
-     <li class="card d-flex flex-column justify-content-center gap-3 mt-10 ">
-  <h2 class="text-xl">{{ sorteo.name }}</h2>
+  <li class="card d-flex flex-column justify-content-center gap-3 mt-10 bg-image">
+    <h2 class="text-xl">{{ sorteo.name }}</h2>
 
-  <p>{{ sorteo.description }}</p>
+    <p>{{ sorteo.description }}</p>
 
-  <button routerLink="/panel-user/detail-sorteo/{{sorteo._id}}">
-    Ir al sorteo
-  </button>
-  <div class="d-flex justify-content-center gap-4">
-    <span>
-      {{ sorteo.startDate | date:'dd/MM/yyyy' }}
-    </span>
-    <span>
-      {{ sorteo.endDate | date:'dd/MM/yyyy' }}
-    </span>
-  </div>
-</li>
+<!-- // lista de premios -->
+    <ul class="premios-container">
+      <li>premio 01  <span>🏆</span> </li> 
+      <li>premio 02  <span>🥈</span></li> 
+      <li>premio 03  <span>🥉</span></li> 
+    </ul>
+     
+    <button routerLink="/panel-user/detail-sorteo/{{sorteo._id}}">
+      Participar
+    </button>
+
+
+
+    <div class="d-flex justify-content-center gap-4">
+      <span>
+        {{ sorteo.startDate | date:'dd/MM/yyyy' }}
+      </span>
+      <span>
+        {{ sorteo.endDate | date:'dd/MM/yyyy' }}
+      </span>
+    </div>
+  </li>
   }@empty {
-        
+
   }
- 
+
 </ul>
 
