@@ -87,7 +87,7 @@ export class AdminService {
   }
 
 
-  agregar_imagen_galeria_admin(id: string, data: { _id: string | Blob; imagen: string | Blob; }, token: any): Observable<any> {
+  agregar_imgPortada_admin(id: string, data: { _id: string | Blob; imagen: string | Blob; }, token: any): Observable<any> {
     let headers = new HttpHeaders({ 'Authorization': token });
     const fd = new FormData();
     fd.append('_id', data._id);

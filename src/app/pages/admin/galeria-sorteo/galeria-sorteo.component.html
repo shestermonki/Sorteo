@@ -1,4 +1,3 @@
-
 <div class="border-bottom pt-5 mt-2 mb-5">
   <h1 class="mt-2 mt-md-4 mb-3 pt-5">Productos</h1>
   <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
@@ -10,23 +9,15 @@
 
 <div class="card box-shadow-sm">
   <div class="card-header">
-    <h5 style="margin-bottom: 0px;">Galería de producto</h5>
+    <h5 style="margin-bottom: 0px;">Galería de imagenes</h5>
   </div>
 
   <div class="card-body">
     <div style="max-width: 48rem;">
 
-      <div class="row mb-5">
-        <div class="col-md-8" style="padding-left: 0px;">
-          <div class="card" style="    height: 100% !important;background: #f5eeee;">
-            <div class="card-body">
-              <h3 class="card-product-title text-truncate mb-2">
-                <a class="nav-link mb-3">{{sorteo.name}}</a>
-                <p class="text-muted">{{sorteo.descripcion}}</p>
-              </h3>
-            </div>
-          </div>
-        </div>
+      <div>
+        <p>Nombre del sorteo: {{ sorteo().name}}</p>
+        <!-- Agrega más propiedades aquí según sea necesario -->
       </div>
 
       <div class="form-group row align-items-center">
@@ -56,7 +47,7 @@
         <div class="col-md-9">
 
           <div class="table-responsive mt-3">
-            <table class="table table-sm table-bordered" *ngIf="sorteo.imagenes">
+            <table class="table table-sm table-bordered" *ngIf="sorteo().imagenes">
               <thead class="thead-dark">
                 <tr>
 
@@ -65,7 +56,7 @@
                   <th>Eliminar</th>
                 </tr>
               </thead>
-              <ng-container *ngIf="sorteo.imagenes.length== 0">
+              <ng-container *ngIf="sorteo().imagenes.length== 0">
                 <tbody>
                   <tr>
                     <td colspan="2" class="text-center">
@@ -75,15 +66,15 @@
                   </tr>
                 </tbody>
               </ng-container>
-              <ng-container *ngIf="sorteo.galeria.length>=1">
-                <tbody *ngFor="let item of sorteo.galeria; let indice = index">
-                  <tr>
-                    <td>
+              <ng-container *ngIf="sorteo().imagenes.length>=1">
+                <tbody *ngFor="let item of sorteo().imagenes; let indice = index">
+                   <td>
                       <p>
                         <img [src]="url +'obtener_portada/'+item.imagen_name" alt="" style="width: 80px;">
                         {{item.imagen_name}}
                       </p>
                     </td>
+                  <tr>
                     <td><a style="cursor: pointer;" class="text-danger" data-toggle="modal"
                         [attr.data-target]="'#delete-'+item._id">[Eliminar]</a></td>
                   </tr>
