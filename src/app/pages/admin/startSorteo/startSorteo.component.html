@@ -1,12 +1,59 @@
+<section class="flex gap-5 container">
+  <article class="contain ">
+  
+    <div class="laruleta" #laruleta>
+      <div class="inner-ruleta">
 
-<div class="contain">
-  <div class="">
-    Número de participantes {{ participants().length }}
+      </div>
+    </div>
+    <button (click)="startRuleta()">Empezar</button>
+  </article>
+  
+  <div class="width">
+    <h1 class="title">Titulo del sorteo</h1>
+    <p>
+      <strong class="subtitle">Reglas:</strong>
+      <br>
+      1. Cada participante tendrá un número asignado.
+      <br>
+      2. El sorteo se realizará con una ruleta.
+      <br>
+      3. El ganador será el número que quede seleccionado.
+   </p>
+   <p class="subtitle">
+    Número de participantes <span>{{ participants().length }}</span>
+  </p>
+    <table class="table table-dark table-hover my-auto mx-auto mb-10 ">
+   
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Avatar</th>
+        <th scope="col" class="mx-auto">Participante</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr >
+        <th scope="row">1</th>
+        <td><img src="../../../../assets/images/perfil-registro.jpg" alt="avatar" width="50" height="50"></td>
+        <td>Pedrito</td>
+      </tr>
+      <tr >
+        <th scope="row">2</th>
+        <td><img src="../../../../assets/images/perfil-registro.jpg" alt="avatar" width="50" height="50"></td>
+        <td>Juanes</td>
+      </tr>
+      <tr >
+        <th scope="row">3</th>
+        <td><img src="../../../../assets/images/perfil-registro.jpg" alt="avatar" width="50" height="50"></td>
+        <td>Juanes</td>
+      </tr>
+      
+    </tbody>
+    
+  </table>
   </div>
-  <div class="laruleta" #laruleta>  
-    <div class="inner-ruleta">  
-     
-    </div> 
-  </div>
-  <button (click)="startRuleta()">Empezar</button>
-</div>
+  
+  
+
+</section>

@@ -49,3 +49,53 @@ button:hover{
   background: black;
   color: white;
 }
+
+.title{
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+
+}
+
+.subtitle{
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+.subtitle > span{
+  font-weight: bold;
+}
+
+.flex{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.width{
+  width: 50%;
+}
+
+table img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+
+}
+
+@media (max-width: 768px){
+  .contain{
+    height: 75vh;
+  }
+  .flex {
+    flex-direction: column;
+    margin-bottom: 20px;
+    
+  }
+
+  .width{
+    width: 90%;
+  }
+
+}
