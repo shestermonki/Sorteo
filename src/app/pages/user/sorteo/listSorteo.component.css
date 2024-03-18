@@ -27,6 +27,17 @@ ul{
     transform: scale(1.03);
 }
 
+.bg-image{
+
+    background-image: url('../../../../assets/images/san-andres.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 10px;
+}
+
 .card .text-xl{
     font-size: 2rem;
     font-weight: bold;
@@ -74,3 +85,13 @@ ul{
 
 }
 
+
+
+
+.premios-container li{
+    /* #remove the bullets */
+    list-style-type: none;
+    padding-left: 0;
+    color: white;
+    text-transform: uppercase;
+}
