@@ -6,9 +6,9 @@
 
 Este proyecto fue desarrollado por el equipo **TitanesDev**, compuesto por:
 
-- ![Bandera de Colombia](https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg) **Alexander Castro** - Colombia
-- ![Bandera de España](http://localhost:1337/api/scores/2) **Shester** - España
-- ![Bandera de Bolivia](https://www.iconfinder.com/search?q=keyboard) **Miguel** - Bolivia
+- ![alt text](image-1.png) **Alexander Castro** - Colombia
+- [alt text](image.png) **Shester** - España!
+- ![alt text](image-2.png)**Miguel** - Bolivia
 Cada uno de estos desarrolladores ha contribuido significativamente al proyecto. ¡Gracias por su arduo trabajo y dedicación!
 
 
