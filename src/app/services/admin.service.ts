@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Users } from '../interfaces/admin/response-data-user.interface';
 import { Sorteos } from '../interfaces/admin/response-sorteos.interface';
 import { Admins } from '../interfaces/admin/response-admins.interface';
+import { Premio } from '../pages/admin/galeria-sorteo/galeria-sorteo.component';
 
 @Injectable({
   providedIn: 'root'
@@ -93,6 +94,14 @@ export class AdminService {
     fd.append('_id', data._id);
     fd.append('imagen', data.imagen);
     return this._http.put(this.url + 'agregar_imgPortada_admin/' + id, fd, { headers: headers });
+  }
+
+  agregar_premios_admin(id: string, data: Premio, token: any): Observable<any> {
+    const { _id, file,name } = data;
+    let headers = new HttpHeaders({ 'Authorization': token });
+    return this._http.put(this.url + 'premios/create/' + id, {
+      _id, name, file
+    }, { headers: headers });
   }
 
   obtener_sorteo_admin(id: string, token: any): Observable<any> {

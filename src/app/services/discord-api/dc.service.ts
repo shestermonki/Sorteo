@@ -23,12 +23,11 @@ export class DiscordService {
   constructor() { }
 
   verificarAutenticacion(): boolean {
-    const token = this.getToken();
+    const token = this.dcToken.getToken();
     return !!token;
   }
 
   getUrlAuthDiscord() {
-    console.log(this.redirectURI);
     return `${this.dcUrl}/oauth2/authorize?client_id=${this.clientID}&response_type=code&redirect_uri=${this.redirectURI}&scope=${this.scope}`;
   }
 
@@ -40,7 +39,6 @@ export class DiscordService {
 
   public async isAuthenticated(): Promise<boolean> {
     const token = this.dcToken.getToken();
-    console.log(token);
     
     if (!token) {
       return false;
@@ -55,16 +53,6 @@ export class DiscordService {
     } catch (error) {
       return false;
     }
-  }
-
-
-  getToken() {
-    const token = this.cookieService.get('discordToken');
-    return token;
-  }
-  
-  setToken( discordToken: string ){
-    this.cookieService.set('discordToken', discordToken);
   }
 
 }

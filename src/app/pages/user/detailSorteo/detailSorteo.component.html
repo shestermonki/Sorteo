@@ -1,6 +1,11 @@
 
 Info del sorteo
 
+
+<button class="btn btn-dark" (click)="participarSorteo()">
+  Participar en el sorteo
+</button>
+
 @if (respRegisterSorteo()?.status === 'NOTSERVER') {
   <div class="card-invitation">
     <a href="https://discord.com/invite/pBjEVYTC7t">Ingresa a nuestro Servidor</a>

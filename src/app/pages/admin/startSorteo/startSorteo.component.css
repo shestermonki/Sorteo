@@ -1,3 +1,51 @@
-:host {
-  display: block;
+.contain{
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 80px);
+}
+
+.laruleta{
+  height: 345px;
+  width: 345px;
+  border-radius: 50%;
+  background:  linear-gradient(0deg,var(--color-principal) ,var(--color-contraste), var(--color-claro) );
+  position:relative;
+  animation: girar 2s linear infinite;
+  animation-play-state: paused; 
+}
+
+.inner-ruleta{
+  background-color: black;
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%); 
+}
+
+@keyframes girar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+button{
+  background: white;
+  padding: 10px;
+  font-size: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 5px 0px 3px rgba(0,0,0,0.1);
+  font-size: 1.6rem;
+  width: 117px;
+}
+
+button:hover{
+  background: black;
+  color: white;
 }

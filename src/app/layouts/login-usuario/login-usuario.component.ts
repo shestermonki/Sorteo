@@ -33,9 +33,4 @@ export default class LoginUsuarioComponent implements OnInit {
     }
   }
 
-  traerCookie(){
-    console.log(this.discordService.getToken());
-    
-  }
-
 }

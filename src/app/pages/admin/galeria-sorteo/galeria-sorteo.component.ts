@@ -1,28 +1,43 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
 import { GLOBAL } from '../../../services/GLOBAL';
 import { AdminService } from '../../../services/admin.service';
 import SideNavComponent from '../components/side-nav/side-nav.component';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, } from '@angular/common';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ValidatorsService } from '../../../services/validators.service';
 declare var $: (arg0: string) => { (): any; new(): any; val: { (arg0: string): void; new(): any; }; };
+
+export interface Premio {
+  "_id": string,
+  "name": string,
+  "file": string,
+}
 
 @Component({
   selector: 'app-galeria-sorteo',
   standalone: true,
-  imports: [SideNavComponent, NgIf, NgFor],
+  imports: [
+    SideNavComponent,
+    CommonModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './galeria-sorteo.component.html',
   styleUrl: './galeria-sorteo.component.css'
 })
 export default class GaleriaSorteoComponent implements OnInit {
 
   public sorteo = signal<any>({});
-  public file: File | undefined = undefined;
   public id: any;
   public token: any;
-  public url;
+  public url: string;
   public load_btn = false;
   public load_btn_eliminar = false;
+
+  public objPremio!: FormGroup;
+  private _fb = inject( FormBuilder );
+  private _validatorsService = inject( ValidatorsService );
 
   constructor(private _route: ActivatedRoute,
     private _adminService: AdminService) {
@@ -37,24 +52,58 @@ export default class GaleriaSorteoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initFormArray();
+    console.log(this.objPremio);
   }
 
-  subir_imagen() {
-    if (this.file != undefined) {
-      let data = {
-        imagen: this.file,
-        _id: uuidv4()
-      }
-      console.log(data);
-      this._adminService.agregar_imgPortada_admin(this.id, data, this.token).subscribe(
-        response => {
-          this.init_data();
-          $('#input-img').val('');
-        }
-      );
-    } else {
+  initFormArray(){
+    this.objPremio = this._fb.group({
+      premios: this._fb.array([
+        this._fb.group({
+          _id: [ '', ],
+          name: ['', Validators.required],
+          file: [null, Validators.required]
+        })
+      ])
+    });
+  }
 
-    }
+  getFormArray(){
+    return this.objPremio.get('premios') as FormArray;
+  }
+
+  addPremio(  ){
+    this.getFormArray().push(this._fb.group({
+      _id: [ '' ],
+      name: ['',],
+      file: [null ]
+    }));
+  }
+
+  eliminarPremio( i: number ){
+    console.log(this.getFormArray().controls[i]);
+    this.getFormArray().removeAt( i );
+  }
+
+  getValueOfArray( index: number ){
+    const form = this.getFormArray().controls[index] as FormGroup;
+    return form.get('file')?.value
+  }
+
+  subir_imagen( index: number ) {
+    console.log(this.objPremio.valid);
+    
+    if (this.objPremio.invalid) return;
+
+    const premio: Premio = this.getFormArray().controls[index].value;
+    premio._id = uuidv4();
+
+    this._adminService.agregar_premios_admin(this.id, premio, this.token).subscribe(
+      response => {
+        this.init_data();
+        $('#input-img').val('');
+      }
+    );
   }
 
 
@@ -68,7 +117,7 @@ export default class GaleriaSorteoComponent implements OnInit {
 
           this.sorteo.set(response.data);
         }
-        console.log(this.sorteo);
+        console.log(this.sorteo());
       },
       error => {
         console.error(error);
@@ -77,7 +126,7 @@ export default class GaleriaSorteoComponent implements OnInit {
   }
 
 
-  fileChangeEvent(event: any): void {
+  fileChangeEvent(event: any, index: number): void {
     var file;
     if (event.target.files && event.target.files[0]) {
       file = <File>event.target.files[0];
@@ -90,20 +139,16 @@ export default class GaleriaSorteoComponent implements OnInit {
 
       if (file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg') {
 
-        this.file = file;
+        const form = this.getFormArray().controls[index] as FormGroup;
+        form.get('file')?.setValue(file);
 
       } else {
-
         $('#input-img').val('');
-        this.file = undefined;
       }
     } else {
 
       $('#input-img').val('');
-      this.file = undefined;
     }
-
-    console.log(this.file);
 
   }
 

@@ -37,7 +37,6 @@ export default class LayoutUserComponent implements OnInit {
   async getDataUser(){
     this.pageLoading.set( true );
     this.discordService.getDataUser().subscribe( (user)=>{
-      console.log(user);
       
       this.user.update( ()=> user );
       this.pageLoading.set( false );

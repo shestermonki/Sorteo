@@ -30,7 +30,7 @@ export const routes: Routes = [
           { path: 'editsorteo/:id', component: NewSorteoAdminComponent, canActivate: [AdminGuard] },
           { path: 'newadmin', component: NewEditAdminComponent, canActivate: [AdminGuard] },
           { path: 'editadmin/:id', component: NewEditAdminComponent, canActivate: [AdminGuard] },
-          { path: 'startsorteo', component: StartSorteoComponent, canActivate: [AdminGuard] },
+          { path: 'startsorteo/:id', component: StartSorteoComponent, canActivate: [AdminGuard] },
           { path: '', redirectTo: 'newsorteo', pathMatch: 'full' }
         ]
       },

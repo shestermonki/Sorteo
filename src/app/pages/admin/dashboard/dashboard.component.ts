@@ -106,10 +106,9 @@ export default class DashboardComponent implements OnInit {
   }
 
   iniciarSorteo( id: string ){
-    console.log(id);
     $('#start-' + id).modal('hide');
-    $('.modal-backdrop').removeClass('show');
-    this._router.navigateByUrl( '/admin/panel/startsorteo' );
+    $('.modal-backdrop').removeClass('modal-backdrop');
+    this._router.navigateByUrl( '/admin/panel/startsorteo/' + id );
   }
 
 }

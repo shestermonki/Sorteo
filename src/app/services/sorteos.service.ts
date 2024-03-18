@@ -34,17 +34,19 @@ export class SorteosService {
   private http = inject( HttpClient );
   private dcService = inject( DiscordService );
 
+  private dcToken = new TokenDc();
+
   constructor() { }
 
   getListSorteosUser(): Observable<ResponseListSorteos[]>{
-    const token = this.dcService.getToken();
+    const token = this.dcToken.getToken();
 
     const headers = new HttpHeaders({ 'authorization': `Bearer ${token}` });
     return this.http.get<ResponseListSorteos[]>( `${this.baseUrl}${this.path}`, { headers } );
   }
 
   registerUserInSorteo( sorteoId: string ): Observable<RegisterUserInSorteo | undefined>{
-    const token = this.dcService.getToken();
+    const token = this.dcToken.getToken();
 
     if (!token) return of(undefined);
 

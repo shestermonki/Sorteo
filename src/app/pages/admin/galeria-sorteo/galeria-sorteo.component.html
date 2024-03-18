@@ -1,120 +1,135 @@
-<div class="border-bottom pt-5 mt-2 mb-5">
-  <h1 class="mt-2 mt-md-4 mb-3 pt-5">Galeria de imagenes</h1>
-  <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
-    <p class="text-muted">Este módulo se establece la galeria de imagenes del sorteo.</p>
-
-  </div>
+<div class="border-bottom mb-5">
+  <h1 class="mb-3">Asignar Premios</h1>
 </div>
 
-
-<div class="card box-shadow-sm">
+<div class="card box-shadow-sm m-5">
   <div class="card-header">
-    <h5 style="margin-bottom: 0px;">Galería de imagenes</h5>
+    <h5 style="margin-bottom: 0px;">Premios</h5>
   </div>
 
   <div class="card-body">
-    <div style="max-width: 48rem;">
-
+    <div style="max-width: 52rem;">
       <div>
-        <p>Nombre del sorteo: {{ sorteo().name}}</p>
-        <p>Nombre del sorteo: {{ sorteo().description}}</p>
-        <!-- Agrega más propiedades aquí según sea necesario -->
+        <h2>Sorteo: {{ sorteo().name}}</h2>
       </div>
 
       <div class="form-group row align-items-center">
-        <label class="col-md-3 col-form-label font-weight-medium" for="text-input">Nueva imagen</label>
-        <div class="col-md-9">
-          <div class="input-group">
-            <input id="input-img" class="form-control" (change)="fileChangeEvent($event)" type="file">
-            <div class="input-group-append">
-              <ng-container *ngIf="file != undefined">
-                <button class="btn btn-primary" type="button" (click)="subir_imagen()">Subir</button>
-                <button *ngIf="load_btn" type="button" class="btn btn-primary">
-                  <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
-                  Subiendo...
-                </button>
-              </ng-container>
-              <ng-container *ngIf="file == undefined">
-                <button class="btn btn-primary" type="button" disabled>Subir</button>
-              </ng-container>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-
-        </div>
-        <div class="col-md-9">
-
-          <div class="table-responsive mt-3">
-            <table class="table table-sm table-bordered" *ngIf="sorteo().imagenes">
-              <thead class="thead-dark">
-                <tr>
-
-                  <th>Titulo</th>
-
-                  <th>Eliminar</th>
-                </tr>
-              </thead>
-              <ng-container *ngIf="sorteo().imagenes.length== 0">
-                <tbody>
-                  <tr>
-                    <td colspan="2" class="text-center">
-                      <span class="text-muted">No hay imagenes disponibles</span>
-                    </td>
-
-                  </tr>
-                </tbody>
-              </ng-container>
-              <ng-container *ngIf="sorteo().imagenes.length>=1">
-                <tbody *ngFor="let item of sorteo().imagenes; let indice = index">
-                   <td>
-                      <p>
-                        <img [src]="url +'obtener_portada/'+item.imagen_name" alt="" style="width: 80px;">
-                        {{item.imagen_name}}
-                      </p>
-                    </td>
-                  <tr>
-                    <td><a style="cursor: pointer;" class="text-danger" data-toggle="modal"
-                        [attr.data-target]="'#delete-'+item._id">[Eliminar]</a></td>
-                  </tr>
-
-                  <div class="modal fade" id="delete-{{item._id}}" tabindex="-1" style="display: none;"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title">Confirmación de eliminación</h4>
-                          <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
-                              aria-hidden="true">×</span></button>
-                        </div>
-                        <div class="modal-body">
-                          <p>Desea eliminar esta imagen?</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
-                          <button *ngIf="!load_btn_eliminar" class="btn btn-primary btn-shadow btn-sm"
-                            (click)="eliminar(item._id)" type="button">Si, eliminar</button>
-                          <button *ngIf="load_btn_eliminar" type="button" class="btn btn-secondary" disabled>
-                            <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
-                            Eliminando...
-                          </button>
-                        </div>
-                      </div>
+        <form class="col-md-10" [formGroup]="objPremio">
+          @for (item of getFormArray().controls; track $index) {
+            <div formArrayName="premios">
+              <div [formGroupName]="$index" class="row align-items-center">
+                <div class="col-10">
+                  <div class="mb-2">
+                    <label>Nombre del Premio <b>({{ $index + 1  }} Puesto)</b></label>
+                    <input formControlName="name" type="text" class="form-control">
+                  </div>
+                  <div class="input-group mb-5">
+                    <input formControlName="file"
+                    id="input-img" class="form-control" (change)="fileChangeEvent($event, $index)" type="file">
+                    <div class="input-group-append">
+                      <ng-container *ngIf="getValueOfArray( $index) != undefined"> 
+                        <button class="btn btn-primary" type="button" (click)="subir_imagen( $index )">Subir</button>
+                        <button *ngIf="load_btn" type="button" class="btn btn-primary">
+                          <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
+                          Subiendo...
+                        </button>
+                      </ng-container>
+                      <ng-container *ngIf="getValueOfArray( $index) == undefined">
+                        <button class="btn btn-primary" type="button" disabled>Subir</button>
+                      </ng-container>
                     </div>
                   </div>
-                </tbody>
-              </ng-container>
+                </div>
+                @if (getFormArray().controls.length > 1) {
+                  <div class="col-2">
+                    <button class="btn btn-danger" (click)="eliminarPremio( $index )">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                }
+              </div>
+            </div>
+          }
 
-            </table>
-          </div>
-        </div>
-
+          <!-- <p>
+            <img [src]="url +'obtener_portada/'+item.imagen_name" alt="" style="width: 80px;">
+            {{item.imagen_name}}
+          </p> -->
+        </form>
       </div>
-
+      <button (click)="addPremio()"
+        class="col-md-2 btn btn-secondary">
+          <i class="fa-solid fa-plus"></i>
+        </button>
     </div>
 
   </div>
 
 </div>
+
+<pre>
+  {{ objPremio.value | json }}
+</pre>
+<!-- <div class="col-md-9">
+
+  <div class="table-responsive mt-3">
+    <table class="table table-sm table-bordered" *ngIf="sorteo().imagenes">
+      <thead class="thead-dark">
+        <tr>
+          <th>Titulo</th>
+          <th>Imagen</th>
+        </tr>
+      </thead>
+      <ng-container *ngIf="sorteo().imagenes.length== 0">
+        <tbody>
+          <tr>
+            <td colspan="2" class="text-center">
+              <span class="text-muted">No hay imagenes disponibles</span>
+            </td>
+
+          </tr>
+        </tbody>
+      </ng-container>
+      <ng-container *ngIf="sorteo().imagenes.length>=1">
+        <tbody *ngFor="let item of sorteo().imagenes; let indice = index">
+            <td>
+              <p>
+                <img [src]="url +'obtener_portada/'+item.imagen_name" alt="" style="width: 80px;">
+                {{item.imagen_name}}
+              </p>
+            </td>
+          <tr>
+            <td><a style="cursor: pointer;" class="text-danger" data-toggle="modal"
+                [attr.data-target]="'#delete-'+item._id">[Eliminar]</a></td>
+          </tr>
+
+          <div class="modal fade" id="delete-{{item._id}}" tabindex="-1" style="display: none;"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Confirmación de eliminación</h4>
+                  <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                  <p>Desea eliminar esta imagen?</p>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                  <button *ngIf="!load_btn_eliminar" class="btn btn-primary btn-shadow btn-sm"
+                    (click)="eliminar(item._id)" type="button">Si, eliminar</button>
+                  <button *ngIf="load_btn_eliminar" type="button" class="btn btn-secondary" disabled>
+                    <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
+                    Eliminando...
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </tbody>
+      </ng-container>
+
+    </table>
+  </div>
+</div> -->

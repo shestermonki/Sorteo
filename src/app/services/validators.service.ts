@@ -33,6 +33,7 @@ export class ValidatorsService {
 
         case 'invalidEmail': return 'Formato de email invalido';
         case 'notCharacterSpecial': return 'No se aceptan caracter especiales como: _-.,';
+        case 'invalidObject': return 'Objecto vacio';
       }
     }
 
@@ -50,4 +51,10 @@ export class ValidatorsService {
 
     return (control.value && !emailRegexp.test(control.value )) ? { invalidEmail: true } : null;
   }
+
+  notObjectNull(control: FormControl){
+    const value = control.value;
+    return ( Object.keys(value).length > 0 ) ? null : { invalidObject: true };
+  }
+
 }

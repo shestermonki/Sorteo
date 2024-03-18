@@ -21,6 +21,7 @@ export default class DetailSorteoComponent implements OnInit {
   
   public urlInvitacion = 'https://discord.com/invite/pBjEVYTC7t';
   public toggleToast = signal( false );
+  public sorteoId = signal( '' );
   public respRegisterSorteo = signal<RegisterUserInSorteo | null>(null);
   
   private sorteosService = inject( SorteosService );
@@ -36,6 +37,7 @@ export default class DetailSorteoComponent implements OnInit {
       const { id } = param;
       if( !id ) return;
 
+      this.sorteoId.set( id );
       this._adminService.obtener_sorteo_admin( id, '' ).subscribe( sorteo =>{
         const objSorteo = sorteo.data as Sorteos;
         console.log(objSorteo);
@@ -45,10 +47,11 @@ export default class DetailSorteoComponent implements OnInit {
     });
   }
 
-  participarSorteo( sorteoId: string ){
-    this.sorteosService.registerUserInSorteo(sorteoId)
+  participarSorteo(){
+    this.sorteosService.registerUserInSorteo(this.sorteoId())
     .subscribe( data =>{
-
+      console.log(data);
+      
       if (!data) return;
       this.respRegisterSorteo.update( ()=> data );
       this.toggleToast.set( true );
