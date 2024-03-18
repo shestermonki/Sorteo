@@ -6,9 +6,9 @@
 
 Este proyecto fue desarrollado por el equipo **TitanesDev**, compuesto por:
 
-- ![alt text](image-1.png) **Alexander Castro** - Colombia
-- [alt text](image.png) **Shester** - España!
-- ![alt text](image-2.png)**Miguel** - Bolivia
+- ![alt text](colombia.png)**Alexander Castro** - Colombia
+- ![alt text](spain.png) **Shester** - España!
+- ![alt text](bandera.png)**Miguel** - Bolivia
 Cada uno de estos desarrolladores ha contribuido significativamente al proyecto. ¡Gracias por su arduo trabajo y dedicación!
 
 
