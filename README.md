@@ -57,3 +57,31 @@ Si deseas contribuir al proyecto, por favor, abre un issue o una pull request.
 Licencia
 MIT
 
+
+
+.env
+
+PORT= 3000
+MONGO_URI=mongodb+srv://titanes_dev:qqc7h6GlJNESdqn3@titanes_db.drxgzvy.mongodb.net/sorteo
+
+JWT_SECRET=thisissecretois
+JWT_LIFETIME=30d
+
+CLIENT_ID=1216790330196627477
+CLIENT_SECRET=aja0wSj2RATZxiSQw8BoQwD9t3mUHvQX
+
+DISCORD_TOKEN=MTIxNjc5MDMzMDE5NjYyNzQ3Nw.G7HN69.sz7By3jCOxnkasdFW5UxgyTgQAnPPjHiBuLy5w
+BASE_DICORD_URL=https://discord.com/api/v10
+
+# Auth Dc
+CLIENT_REDIRECT_URI=http://localhost:3000/auth/redirect
+
+# DISCORD
+CLIENT_ID=1216790330196627477
+CLIENT_SECRET=aja0wSj2RATZxiSQw8BoQwD9t3mUHvQX
+REDIRECT_DISCORD_URI=http://localhost:3000/api/discord/authorize
+#REDIRECT_DISCORD_URI=http://localhost:3000/api/redirect
+
+
+JWT_SECRET=diegoLoco
+
