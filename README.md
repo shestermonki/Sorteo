@@ -2,12 +2,13 @@
 
 ## Desarrolladores
 
-Este proyecto fue desarrollado por:
+# 🚀 EQUIPO# 24 : TitanesDev
 
-- ![Bandera de Colombia](https://en.wikipedia.org/wiki/Flag_of_Colombia) **Alexander Castro** - Colombia
-- ![Bandera de España](https://en.wikipedia.org/wiki/Flag_of_Spain) **Shester** - España
-- ![Bandera de Bolivia](https://en.wikipedia.org/wiki/Flag_of_Bolivia) **Miguel** - Bolivia
+Este proyecto fue desarrollado por el equipo **TitanesDev**, compuesto por:
 
+- ![Bandera de Colombia](https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg) **Alexander Castro** - Colombia
+- ![Bandera de España](http://localhost:1337/api/scores/2) **Shester** - España
+- ![Bandera de Bolivia](https://www.iconfinder.com/search?q=keyboard) **Miguel** - Bolivia
 Cada uno de estos desarrolladores ha contribuido significativamente al proyecto. ¡Gracias por su arduo trabajo y dedicación!
 
 
@@ -38,6 +39,12 @@ CLIENT_SECRET=
 REDIRECT_DISCORD_URI=
 DISCORD_TOKEN=
 BASE_DICORD_URL=
+
+
+Para instalación en el front end 
+1. Clona el repositorio.
+2. Instala las dependencias con `npm install`.
+3. npm run start
 
 
 ## Ejecuta la aplicación con `npm run start`.
