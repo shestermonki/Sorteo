@@ -4,7 +4,7 @@ export interface ResponseListSorteos {
   description:  string;
   startDate:    string;
   endDate:      string;
-  // participants: string[];
+  participants: string[];
   // winner:       null;
   prize:        string;
   location:     string;

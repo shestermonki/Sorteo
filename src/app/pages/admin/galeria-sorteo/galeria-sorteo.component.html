@@ -16,39 +16,39 @@
       <div class="form-group row align-items-center">
         <form class="col-md-10" [formGroup]="objPremio">
           @for (item of getFormArray().controls; track $index) {
-            <div formArrayName="premios">
-              <div [formGroupName]="$index" class="row align-items-center">
-                <div class="col-10">
-                  <div class="mb-2">
-                    <label>Nombre del Premio <b>({{ $index + 1  }} Puesto)</b></label>
-                    <input formControlName="name" type="text" class="form-control">
-                  </div>
-                  <div class="input-group mb-5">
-                    <input formControlName="file"
-                    id="input-img" class="form-control" (change)="fileChangeEvent($event, $index)" type="file">
-                    <div class="input-group-append">
-                      <ng-container *ngIf="getValueOfArray( $index) != undefined"> 
-                        <button class="btn btn-primary" type="button" (click)="subir_imagen( $index )">Subir</button>
-                        <button *ngIf="load_btn" type="button" class="btn btn-primary">
-                          <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
-                          Subiendo...
-                        </button>
-                      </ng-container>
-                      <ng-container *ngIf="getValueOfArray( $index) == undefined">
-                        <button class="btn btn-primary" type="button" disabled>Subir</button>
-                      </ng-container>
-                    </div>
+          <div formArrayName="premios">
+            <div [formGroupName]="$index" class="row align-items-center">
+              <div class="col-10">
+                <div class="mb-2">
+                  <label>Nombre del Premio <b>({{ $index + 1 }} Puesto)</b></label>
+                  <input formControlName="name" type="text" class="form-control">
+                </div>
+                <div class="input-group mb-5">
+                  <input formControlName="file" id="input-img" class="form-control"
+                    (change)="fileChangeEvent($event, $index)" type="file">
+                  <div class="input-group-append">
+                    <ng-container *ngIf="getValueOfArray( $index) != undefined">
+                      <button class="btn btn-primary" type="button" (click)="subir_imagen( $index )">Subir</button>
+                      <button *ngIf="load_btn" type="button" class="btn btn-primary">
+                        <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
+                        Subiendo...
+                      </button>
+                    </ng-container>
+                    <ng-container *ngIf="getValueOfArray( $index) == undefined">
+                      <button class="btn btn-primary" type="button" disabled>Subir</button>
+                    </ng-container>
                   </div>
                 </div>
-                @if (getFormArray().controls.length > 1) {
-                  <div class="col-2">
-                    <button class="btn btn-danger" (click)="eliminarPremio( $index )">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </div>
-                }
               </div>
+              @if (getFormArray().controls.length > 1) {
+              <div class="col-2">
+                <button class="btn btn-danger" (click)="eliminarPremio( $index )">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+              }
             </div>
+          </div>
           }
 
           <!-- <p>
@@ -57,10 +57,9 @@
           </p> -->
         </form>
       </div>
-      <button (click)="addPremio()"
-        class="col-md-2 btn btn-secondary">
-          <i class="fa-solid fa-plus"></i>
-        </button>
+      <button (click)="addPremio()" class="col-md-2 btn btn-secondary">
+        <i class="fa-solid fa-plus"></i>
+      </button>
     </div>
 
   </div>

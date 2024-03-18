@@ -92,7 +92,7 @@ export default class GaleriaSorteoComponent implements OnInit {
 
   subir_imagen( index: number ) {
     console.log(this.objPremio.valid);
-    
+
     if (this.objPremio.invalid) return;
 
     const premio: Premio = this.getFormArray().controls[index].value;
@@ -156,15 +156,8 @@ export default class GaleriaSorteoComponent implements OnInit {
     this.load_btn_eliminar = true;
     this._adminService.eliminar_imagen_galeria_admin(this.id, { _id: id }, this.token).subscribe(
       response => {
-
-
-
-
         this.load_btn_eliminar = false;
-
         this.init_data();
-
-
       },
       error => {
 
